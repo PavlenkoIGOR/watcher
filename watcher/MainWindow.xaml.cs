@@ -44,11 +44,22 @@ namespace watcher
             A4.Height += globalHeight;
             A4.ShowGridLines = true;
         }
+        private void Click_func4_2(object sender, MouseButtonEventArgs e)
+        {
+            A4_2.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(a4height) });
+            A4_2.Height += globalHeight;
+            A4_2.ShowGridLines = true;
+        }
         private void Click_func2(object sender, MouseButtonEventArgs e)
         {
             violetGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(250) });
             violetGrid.Height += 250;
             violetGrid.ShowGridLines = true;
+        }
+        private void AddRow(object o, MouseButtonEventArgs e)
+        {
+            tableWithTechProc.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(15) });
+            tableWithTechProc.Height += 15;
         }
     }
 }

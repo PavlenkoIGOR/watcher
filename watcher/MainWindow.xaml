@@ -188,11 +188,11 @@ Padding="0,0,0,1"
                         Height="{Binding}"
                         Width="{Binding}"
                         VerticalAlignment="Top">
-                        <Grid
+                        <Grid x:Name="A4_2"
                             Width="29.7cm" Height="21.0cm"
                             Background="Bisque"
                             VerticalAlignment="Top" HorizontalAlignment="Stretch"
-                            MouseLeftButtonDown="Click_func" ShowGridLines="True" >
+                            MouseLeftButtonDown="Click_func4_2" ShowGridLines="True" >
                             <Grid.RowDefinitions>
                                 <RowDefinition />
                             </Grid.RowDefinitions>
@@ -214,13 +214,10 @@ Padding="0,0,0,1"
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Grid
-							
-							Grid.Column="1"
-							Grid.Row="1"
-							Background="#FFFF7D7D"
-							VerticalAlignment="Top"
-							HorizontalAlignment="Right"
-							ShowGridLines="True">
+                                    Grid.Column="1"  Grid.Row="1"
+                                    Background="#FFFF7D7D"
+                                    VerticalAlignment="Top"	HorizontalAlignment="Right"
+                                    ShowGridLines="True">
                                     <Grid.RowDefinitions>
                                         <RowDefinition
 									Height="0.5cm" />
@@ -230,17 +227,11 @@ Padding="0,0,0,1"
 									Height="0.5cm" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition
-									Width="1.5cm" />
-                                        <ColumnDefinition
-									Width="2.0cm" />
+                                        <ColumnDefinition	Width="1.5cm" />
+                                        <ColumnDefinition	Width="2.0cm" />
                                     </Grid.ColumnDefinitions>
                                 </Grid>
-                                <Grid
-							
-							Grid.Column="1"
-							ShowGridLines="False"
-							Panel.ZIndex="10">
+                                <Grid x:Name="tableWithTechProc" Grid.Column="1"	ShowGridLines="False"  Panel.ZIndex="10">
                                     <Grid.RowDefinitions>
                                         <RowDefinition
 									Height="0.5cm" />
@@ -273,6 +264,12 @@ Padding="0,0,0,1"
                                         <ColumnDefinition
 									Width="*" />
                                     </Grid.ColumnDefinitions>
+                                    <Grid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Добавить строку"/>
+                                            <MenuItem Header="Удалить строку"/>
+                                        </ContextMenu>
+                                    </Grid.ContextMenu>
                                     <TextBox
 								x:Name="Tools1"
 								Grid.Column="4"
@@ -533,6 +530,7 @@ Padding="0,0,0,1"
         </SelectiveScrollingGrid>
 
     </DockPanel>
+    
 </Window>
 
 <!---->
