@@ -63,7 +63,10 @@ namespace watcher
         }
 	private void AddTextBox(object sender, RoutedEventArgs e)
         {
-        	StackTools.Children.Add(new Grid(){});
+        	StackTools.Children.Add(new Grid()
+            {
+
+            }); //добавление в существующий  StackPanel следующей Grid
         }
     }
 }

@@ -18,9 +18,9 @@ namespace watcher
     /// <summary>
     /// Логика взаимодействия для Page1.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class TitlePage : Page
     {
-        public Page1()
+        public TitlePage()
         {
             InitializeComponent();
         }

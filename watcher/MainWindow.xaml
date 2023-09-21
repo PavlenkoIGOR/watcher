@@ -477,7 +477,6 @@
 											Background="#FFEA41C6"
 											Margin="0,0,0,0"
 											Width="{Binding}"
-											VerticalAlignment="Stretch"
 											Height="{Binding}">
 											<Grid.ColumnDefinitions>
 												<ColumnDefinition
@@ -492,7 +491,7 @@
 												VerticalAlignment="Stretch"
 												FontSize="10"
 												BorderBrush="Black"
-												Height="{Binding}"
+												Height="0.5cm"
 												Margin="0,0,0,0"
 												Width="{Binding}" />
 										</Grid>
