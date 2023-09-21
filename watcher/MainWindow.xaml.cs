@@ -27,39 +27,39 @@ namespace watcher
         public MainWindow()
         {
             InitializeComponent();
-            
+            forTitlePage.Source = new Uri("TitlePage.xaml", UriKind.Relative);
         }
-        //private void Grid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        //{
-        //    if ((sender as Grid).Name == "A4")
-        //    {
 
-        //    }
-
-        //}
-
-        private void Click_func(object sender, MouseButtonEventArgs e)
+		private void Click_func(object sender, MouseButtonEventArgs e)
         {
-            A4.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(a4height) });
-            A4.Height += globalHeight;
-            A4.ShowGridLines = true;
+			switch ((sender as Grid).Name)
+			{
+//				case ("A4"):
+//					A4.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(a4height) });
+//					A4.Height += globalHeight;
+//					A4.ShowGridLines = true;
+//					break;
+				case("A4_2"):
+					A4_2.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(a4height) });
+					A4_2.Height += globalHeight;
+					A4_2.ShowGridLines = true;
+					break;
+			}
         }
-        private void Click_func4_2(object sender, MouseButtonEventArgs e)
-        {
-            A4_2.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(a4height) });
-            A4_2.Height += globalHeight;
-            A4_2.ShowGridLines = true;
-        }
-        private void Click_func2(object sender, MouseButtonEventArgs e)
+
+        private void Click_func2(object sender, RoutedEventArgs e)
         {
             violetGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(250) });
             violetGrid.Height += 250;
             violetGrid.ShowGridLines = true;
         }
-        private void AddRow(object o, MouseButtonEventArgs e)
+        
+        private void AddRow(object sender, RoutedEventArgs e)
         {
-            tableWithTechProc.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(15) });
-            tableWithTechProc.Height += 15;
+        	//MessageBox.Show("asdasdasdasda!!!");
+            tableWithTechProc.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18) });
+            tableWithTechProc.Height += 18;
+            tableWithTechProc.ShowGridLines = true;
         }
     }
 }
