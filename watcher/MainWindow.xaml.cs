@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace watcher
 {
     /// <summary>
@@ -23,14 +25,62 @@ namespace watcher
     {
         private double globalHeight = 793.7d;
         private double a4height = 793.7d;
+        TitlePage titlePage;
 
         public MainWindow()
         {
+            titlePage = new TitlePage();
             InitializeComponent();
-            forTitlePage.Source = new Uri("TitlePage.xaml", UriKind.Relative);
+            //forTitlePage.Source = new Uri("TitlePage.xaml", UriKind.Relative); //эта строка подключает свой Page. В данный момент не нужна т.к. подключается сейчас через InputPage().
+            InputPage();
         }
 
-		private void Click_func(object sender, MouseButtonEventArgs e)
+        private void InputPage()
+        {
+            //MainWindow mainWindow = new MainWindow();
+            Frame mainFrame = this.FindName("forTitlePage") as Frame; // Найдите элемент Frame в главном окне
+            mainFrame.Navigate(titlePage); // Загружаете вашу страницу во Frame
+            this.Show(); // Отображаете главное окно
+        }
+
+
+        //перебор элементов
+        private void FindAllStackPanels()
+        {
+            foreach (var child in LogicalTreeHelper.GetChildren(tableWithTechProc).OfType<StackPanel>())
+            {
+                if (child is StackPanel stackPanel)
+                {
+Console.WriteLine(child.Name);
+                }
+                else
+                {
+                    // Перебор дочерних элементов
+                    FindAllStackPanels();
+                }
+            }
+        }
+
+
+
+        private void Renew(object sender, RoutedEventArgs e)
+        {
+            // tableWithTechProc
+
+            titlePage.mainToolsList.Text = toolsGrid.Text+", шт. - " + quantityCell.Text;
+        }
+
+        /// <summary>
+        /// отслеживание текста в textbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+
+
+
+
+        private void Click_func(object sender, MouseButtonEventArgs e)
         {
 			switch ((sender as Grid).Name)
 			{
@@ -65,8 +115,8 @@ namespace watcher
         {
             //MessageBox.Show("Работает!!!");
             Grid grid = new Grid() { };
-            TextBox txt1 = new TextBox() { FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0,0,0,0)};
-            TextBox txt2 = new TextBox() { FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0,0,0,0)};
+            TextBox txt1 = new TextBox() { FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0,0,0,0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1,1,1,1)};
+            TextBox txt2 = new TextBox() { FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0,0,0,0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 1) };
             
             grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18) });
             grid.ColumnDefinitions.Add(new ColumnDefinition(){ Width = new GridLength(158.7) });

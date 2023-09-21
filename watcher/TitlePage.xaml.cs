@@ -24,6 +24,8 @@ namespace watcher
         {
             InitializeComponent();
         }
+
+
         private void Click_func(object sender, MouseButtonEventArgs e)
         {
 			switch ((sender as Grid).Name)

@@ -23,7 +23,8 @@
 					Margin="0,0,0,0" />
 				<Button
 					Height="25"
-					Content="fgdfg"
+					Content="Обновить"
+                    Click="Renew"
 					Background="Transparent"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Center"
@@ -141,7 +142,7 @@
 									</Grid.ColumnDefinitions>
 								</Grid>
 								<Grid
-									x:Name="tableWithTechProc"
+									x:Name="tableWithTechProc"                                    
 									Panel.ZIndex="10"
 									ShowGridLines="False"
 									Grid.Column="1"
@@ -469,7 +470,6 @@
 										Height="{Binding}"
 										Grid.ColumnSpan="2"
 										VerticalAlignment="Stretch"
-										Background="#FF3D74FF"
 										Orientation="Vertical"
 										MinHeight="18.9"
                                         MouseWheel="AddTextBox"
@@ -486,27 +486,29 @@
                                                 <ColumnDefinition
 													Width="37.0" />
                                             </Grid.ColumnDefinitions>
-                                            <TextBox x:Name="quantityRow"
+                                            <TextBox x:Name="quantityCell"
 												Grid.Column="1"
 												Grid.Row="0"
+                                                BorderThickness="1,1,1,1"
+                                                BorderBrush="Black"
 												HorizontalAlignment="Stretch"
 												VerticalAlignment="Stretch"
 												FontSize="10"
-												BorderBrush="Black"
 												Height="18.9"
 												Margin="0,0,0,0"
 												Width="{Binding}" />
-                                            <TextBox
+                                            <TextBox x:Name="toolsGrid"
+                                                
                                                 Grid.Column="0"
                                                 Grid.Row="0"
                                                 VerticalAlignment="Stretch"
+                                                BorderThickness="1,1,1,1"
                                                 BorderBrush="Black"
                                                 Width="{Binding}"
                                                 Height="18.9"
                                                 HorizontalAlignment="Stretch"
                                                 TextWrapping="Wrap"
                                                 Margin="0,0,0,0"
-                                                x:Name="toolsRow"
                                                 FontSize="10"
                                                 />
                                         </Grid>
