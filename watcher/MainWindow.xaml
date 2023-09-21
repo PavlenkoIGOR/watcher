@@ -97,7 +97,7 @@
 										Header="Удалить строку" />
 								</ContextMenu>
 							</Grid.ContextMenu>
-							<Grid
+                            <Grid x:Name="mainGrid"
 								ShowGridLines="True"
 								Background="White"
 								Panel.ZIndex="9"
@@ -106,7 +106,6 @@
 								HorizontalAlignment="Stretch"
 								VerticalAlignment="Top"
 								Margin="53,53,53,53"
-								x:Name="mainGrid"
 								Height="{Binding}">
 								<Grid.RowDefinitions>
 									<RowDefinition
@@ -119,14 +118,13 @@
 										Width="0.8cm" />
 									<ColumnDefinition />
 								</Grid.ColumnDefinitions>
-								<Grid
+                                <Grid x:Name="sheetsAndSheet"
 									Grid.Column="1"
 									Grid.Row="1"
 									Background="#FFFF7D7D"
 									VerticalAlignment="Top"
 									HorizontalAlignment="Right"
-									ShowGridLines="True"
-									x:Name="sheetsAndSheet">
+									ShowGridLines="True">
 									<Grid.RowDefinitions>
 										<RowDefinition
 											Height="0.5cm" />
@@ -145,7 +143,7 @@
 								<Grid
 									x:Name="tableWithTechProc"
 									Panel.ZIndex="10"
-									ShowGridLines="True"
+									ShowGridLines="False"
 									Grid.Column="1"
 									Grid.Row="0"
 									HorizontalAlignment="Stretch"
@@ -165,7 +163,7 @@
 											IsEnabled="True"
 											MinHeight="18" />
 										<RowDefinition
-											Height="*" />
+											Height="Auto" />
 									</Grid.RowDefinitions>
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition
@@ -177,9 +175,9 @@
 										<ColumnDefinition
 											Width="1.3cm" />
 										<ColumnDefinition
-											Width="4.2cm" />
+											Width="158.7" />
 										<ColumnDefinition
-											Width="1.0cm" />
+											Width="37.0" />
 										<ColumnDefinition
 											Width="4.5cm" />
 										<ColumnDefinition
@@ -211,7 +209,7 @@
 										IsEnabled="False"
 										BorderBrush="Black"
 										BorderThickness="1,1,1,1" />
-									<Label
+                                    <Label Content="6.2 Выполнение работы"
 										Grid.Column="0"
 										Grid.Row="4"
 										Grid.ColumnSpan="8"
@@ -223,8 +221,7 @@
 										Width="{Binding}"
 										VerticalAlignment="Stretch"
 										VerticalContentAlignment="Center"
-										Background="#FFBCBCBC"
-										Content="6.2 Выполнение работы"
+										Background="#FFBCBCBC"										
 										FontSize="10"
 										BorderThickness="1,1,1,1"
 										BorderBrush="Black" />
@@ -293,6 +290,8 @@
 										Width="{Binding}"
 										VerticalAlignment="Stretch"
 										VerticalContentAlignment="Center"
+                                        BorderThickness="1,1,1,1"
+										BorderBrush="Black"
 										Background="#FFBCBCBC"
 										Content="5"></Label>
 									<Label
@@ -460,7 +459,9 @@
 										HorizontalContentAlignment="Center"
 										TextWrapping="Wrap"
 										VerticalContentAlignment="Center" />
+                                    <TextBox Grid.Column="1" Grid.Row="5" Margin="0,0,0,0" TextWrapping="Wrap" Text="operation" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="1,1,1,1" BorderBrush="Black"/>
 									<StackPanel
+                                        
 										Grid.Column="4"
 										Grid.Row="5"
 										HorizontalAlignment="Stretch"
@@ -469,45 +470,48 @@
 										Grid.ColumnSpan="2"
 										VerticalAlignment="Stretch"
 										Background="#FF3D74FF"
-										Orientation="Horizontal"
-										MinHeight="0.5cm"
+										Orientation="Vertical"
+										MinHeight="18.9"
+                                        MouseWheel="AddTextBox"
 										x:Name="StackTools">
-										<Grid
+                                        <Grid
 											HorizontalAlignment="Stretch"
 											Background="#FFEA41C6"
 											Margin="0,0,0,0"
 											Width="{Binding}"
 											Height="{Binding}">
-											<Grid.ColumnDefinitions>
-												<ColumnDefinition
-													Width="4.2cm" />
-												<ColumnDefinition
-													Width="1.0cm" />
-											</Grid.ColumnDefinitions>
-											<TextBox
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition
+													Width="158.7" />
+                                                <ColumnDefinition
+													Width="37.0" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox x:Name="quantityRow"
 												Grid.Column="1"
 												Grid.Row="0"
 												HorizontalAlignment="Stretch"
 												VerticalAlignment="Stretch"
 												FontSize="10"
 												BorderBrush="Black"
-												Height="0.5cm"
+												Height="18.9"
 												Margin="0,0,0,0"
 												Width="{Binding}" />
-										</Grid>
-									</StackPanel>
-									<TextBox
-										Grid.Column="4"
-										Grid.Row="5"
-										VerticalAlignment="Stretch"
-										BorderBrush="Black"
-										Width="{Binding}"
-										Height="{Binding}"
-										HorizontalAlignment="Stretch"
-										TextWrapping="Wrap"
-										Margin="0,0,0,0"
-										x:Name="наимСтрока"
-										FontSize="10" />
+                                            <TextBox
+                                                Grid.Column="0"
+                                                Grid.Row="0"
+                                                VerticalAlignment="Stretch"
+                                                BorderBrush="Black"
+                                                Width="{Binding}"
+                                                Height="18.9"
+                                                HorizontalAlignment="Stretch"
+                                                TextWrapping="Wrap"
+                                                Margin="0,0,0,0"
+                                                x:Name="toolsRow"
+                                                FontSize="10"
+                                                />
+                                        </Grid>
+                                    </StackPanel>
+
 								</Grid>
 								<Label
 									VerticalContentAlignment="Center"
@@ -522,8 +526,9 @@
 									HorizontalAlignment="Stretch"
 									VerticalAlignment="Stretch"
 									Margin="0,0,0,0" />
-							</Grid>
-						</Grid>
+                                
+                            </Grid>
+                        </Grid>
 					</ScrollViewer>
 				</TabItem>
 			</TabControl>

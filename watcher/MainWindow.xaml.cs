@@ -61,12 +61,20 @@ namespace watcher
             tableWithTechProc.Height += 18;
             tableWithTechProc.ShowGridLines = true;
         }
-	private void AddTextBox(object sender, RoutedEventArgs e)
+	private void AddTextBox(object sender, MouseWheelEventArgs e)
         {
-        	StackTools.Children.Add(new Grid()
-            {
-
-            }); //добавление в существующий  StackPanel следующей Grid
+            //MessageBox.Show("Работает!!!");
+            Grid grid = new Grid() { };
+            TextBox txt1 = new TextBox() { FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0,0,0,0)};
+            TextBox txt2 = new TextBox() { FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0,0,0,0)};
+            
+            grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition(){ Width = new GridLength(158.7) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition(){ Width = new GridLength(37.0) });
+            grid.Children.Add(txt1);
+            grid.Children.Add(txt2);
+            Grid.SetColumn(txt2, 1);
+            StackTools.Children.Add(grid); //добавление в существующий  StackPanel следующей Grid
         }
     }
 }
