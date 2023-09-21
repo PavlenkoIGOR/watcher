@@ -93,6 +93,7 @@ Console.WriteLine(child.Name);
 					A4_2.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(a4height) });
 					A4_2.Height += globalHeight;
 					A4_2.ShowGridLines = true;
+
 					break;
 			}
         }

@@ -64,9 +64,11 @@
 				Margin="0,0,0,0">
 				<TabItem
 					Header="Титульный лист">
+                    
 					<Frame
 						x:Name="forTitlePage"></Frame>
-				</TabItem>
+                    
+                </TabItem>
 				<TabItem
 					Header="Выполнение работ">
 					<ScrollViewer
