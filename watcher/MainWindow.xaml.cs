@@ -61,5 +61,9 @@ namespace watcher
             tableWithTechProc.Height += 18;
             tableWithTechProc.ShowGridLines = true;
         }
+	private void AddTextBox(object sender, RoutedEventArgs e)
+        {
+        	StackTools.Children.Add(new Grid(){});
+        }
     }
 }
