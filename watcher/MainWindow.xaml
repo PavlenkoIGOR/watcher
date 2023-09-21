@@ -470,7 +470,8 @@
 										VerticalAlignment="Stretch"
 										Background="#FF3D74FF"
 										Orientation="Horizontal"
-										MinHeight="0.5cm">
+										MinHeight="0.5cm"
+										x:Name="StackTools">
 										<Grid
 											HorizontalAlignment="Stretch"
 											Background="#FFEA41C6"
