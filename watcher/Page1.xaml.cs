@@ -24,5 +24,21 @@ namespace watcher
         {
             InitializeComponent();
         }
+        private void Click_func(object sender, MouseButtonEventArgs e)
+        {
+			switch ((sender as Grid).Name)
+			{
+				case ("A4"):
+					A4.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(793.7) });
+					A4.Height += 793.7;
+					A4.ShowGridLines = true;
+					break;
+//				case("A4_2"):
+//					A4_2.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(a4height) });
+//					A4_2.Height += globalHeight;
+//					A4_2.ShowGridLines = true;
+//					break;
+			}
+        }
     }
 }
