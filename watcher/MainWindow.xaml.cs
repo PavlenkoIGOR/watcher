@@ -45,21 +45,29 @@ namespace watcher
 
 
         //перебор элементов
-        private void FindAllStackPanels()
-        {
-            foreach (var child in LogicalTreeHelper.GetChildren(tableWithTechProc).OfType<StackPanel>())
-            {
-                if (child is StackPanel stackPanel)
-                {
-Console.WriteLine(child.Name);
-                }
-                else
-                {
-                    // Перебор дочерних элементов
-                    FindAllStackPanels();
-                }
-            }
-        }
+		private void RecursivelyProcessVisualTree(DependencyObject element)
+		{
+			// Проверка, является ли элемент контейнером
+			if (element is Visual)
+			{
+				// Обработка текущего элемента
+				
+				// Рекурсивный обход дочерних элементов
+				for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
+				{
+					DependencyObject child = VisualTreeHelper.GetChild(element, i);
+					RecursivelyProcessVisualTree(child);
+					if(element is StackPanel)
+					{
+						int stackPanelCount = 0;
+						stackPanelCount++;
+						operationCell.Text = "элемент "+ element.DependencyObjectType.Name +" найден!" + stackPanelCount + " шт " + child.GetType();
+					}
+
+					
+				}
+			}
+		}
 
 
 
