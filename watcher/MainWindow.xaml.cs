@@ -88,31 +88,16 @@ namespace watcher
                 {
                     foreach (UIElement grid in ((StackPanel)element).Children)
                     {
-                        foreach (UIElement textBox in ((Grid)grid).Children)
-                        {                            
-                            int getColumn = Grid.GetColumn(textBox);
-                            if (getColumn == 0)
-                            {
-                                textBox1Value = ((TextBox)textBox).Text;
-                                tools.Add(textBox1Value, textBox2Value);
-                            }
-                            if (getColumn == 1)
-                            {
-                                textBox2Value = ((TextBox)textBox).Text;
-                                if (tools.ContainsKey(textBox1Value))
-                                {
-                                    tools.Add(textBox1Value, textBox2Value);
-                                } 
-                            }
-                            
-                            col++;
-                        }
+                        tools.Add(
+                            ((TextBox)(grid as Grid).Children[0]).Text,
+                            ((TextBox)(grid as Grid).Children[1]).Text
+                            );
                     }
                 }
             }
             foreach (var item in tools)
             {
-                titlePage.mainToolsList.Text = item.Key + ", шт. - " + item.Value;
+                titlePage.mainToolsList.Text = item.Key + ", шт. - " + item.Value + Environment.NewLine;
             }
             
         }
