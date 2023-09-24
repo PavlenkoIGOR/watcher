@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Xml;
 
 namespace watcher
 {
@@ -33,6 +33,7 @@ namespace watcher
             InitializeComponent();
             //forTitlePage.Source = new Uri("TitlePage.xaml", UriKind.Relative); //эта строка подключает свой Page. В данный момент не нужна т.к. подключается сейчас через InputPage().
             InputPage();
+            
         }
 
         private void InputPage()
@@ -73,9 +74,47 @@ namespace watcher
 
         private void Renew(object sender, RoutedEventArgs e)
         {
-            // tableWithTechProc
+            Dictionary<string, string> tools = new Dictionary<string, string>();
+            string textBox1Value = String.Empty;
+            string textBox2Value = String.Empty;
 
-            titlePage.mainToolsList.Text = toolsGrid.Text+", шт. - " + quantityCell.Text;
+            int col = default;
+            //titlePage.mainToolsList.Text = toolsCell.Text+", шт. - " + quantityCell.Text;
+
+            //лучше этот перебор сделать рекурсией
+            foreach (UIElement element in tableWithTechProc.Children) //перечисление всех дочерних элементов у tableWithTechProc таблицы
+            {
+                if (element is StackPanel)
+                {
+                    foreach (UIElement grid in ((StackPanel)element).Children)
+                    {
+                        foreach (UIElement textBox in ((Grid)grid).Children)
+                        {                            
+                            int getColumn = Grid.GetColumn(textBox);
+                            if (getColumn == 0)
+                            {
+                                textBox1Value = ((TextBox)textBox).Text;
+                                tools.Add(textBox1Value, textBox2Value);
+                            }
+                            if (getColumn == 1)
+                            {
+                                textBox2Value = ((TextBox)textBox).Text;
+                                if (tools.ContainsKey(textBox1Value))
+                                {
+                                    tools.Add(textBox1Value, textBox2Value);
+                                } 
+                            }
+                            
+                            col++;
+                        }
+                    }
+                }
+            }
+            foreach (var item in tools)
+            {
+                titlePage.mainToolsList.Text = item.Key + ", шт. - " + item.Value;
+            }
+            
         }
 
         /// <summary>
@@ -113,21 +152,55 @@ namespace watcher
             violetGrid.ShowGridLines = true;
         }
         
+        /// <summary>
+        /// добавляет новую строку в таблицу с тех.процессом
+        /// </summary>
         private void AddRow(object sender, RoutedEventArgs e)
         {
         	//MessageBox.Show("asdasdasdasda!!!");
             tableWithTechProc.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18) });
             tableWithTechProc.Height += 18;
             tableWithTechProc.ShowGridLines = true;
+
+            StackPanel newStackPanel = new StackPanel
+            {
+                Orientation = Orientation.Vertical,
+                Margin = new Thickness(0),
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Background = Brushes.Red
+            };
+
+            #region добавление в newStackPanel новые TextBox'ы
+            TextBox textBoxSP1 = new TextBox() { MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Text = "1" };            
+            TextBox textBoxSP2 = new TextBox() { MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Text = "2" };
+            textBoxSP1.MouseWheel += AddTextBox;
+            Grid.SetColumn(textBoxSP1, 0);
+            Grid.SetColumn(textBoxSP2, 1);
+            #endregion
+
+            #region создание и добавление своей таблицы в newStackPanel
+            Grid newGridIntoStack = new Grid() { VerticalAlignment = VerticalAlignment.Stretch, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0) };
+            newGridIntoStack.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(158.7) });
+            newGridIntoStack.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(37.0) });
+            newGridIntoStack.Children.Add(textBoxSP1);
+            newGridIntoStack.Children.Add(textBoxSP2);
+
+            newStackPanel.Children.Add(newGridIntoStack);
+            Grid.SetRow(newStackPanel, tableWithTechProc.RowDefinitions.Count-1);
+            Grid.SetColumn(newStackPanel, 4);
+            Grid.SetColumnSpan(newStackPanel, 2);
+            tableWithTechProc.Children.Add(newStackPanel);
+            #endregion
         }
-	private void AddTextBox(object sender, MouseWheelEventArgs e)
+        private void AddTextBox(object sender, MouseWheelEventArgs e)
         {
             //MessageBox.Show("Работает!!!");
             Grid grid = new Grid() { };
-            TextBox txt1 = new TextBox() { FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0,0,0,0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1,1,1,1)};
-            TextBox txt2 = new TextBox() { FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0,0,0,0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 1) };
+            TextBox txt1 = new TextBox() { Name = "toolsCell", FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0,0,0,0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1,1,1,1) };
+            TextBox txt2 = new TextBox() { Name = "quantityCell", FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0,0,0,0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 1) };
             
-            grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18) });
+            grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18.9) });
             grid.ColumnDefinitions.Add(new ColumnDefinition(){ Width = new GridLength(158.7) });
             grid.ColumnDefinitions.Add(new ColumnDefinition(){ Width = new GridLength(37.0) });
             grid.Children.Add(txt1);

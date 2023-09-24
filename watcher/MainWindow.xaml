@@ -462,32 +462,36 @@
 										HorizontalContentAlignment="Center"
 										TextWrapping="Wrap"
 										VerticalContentAlignment="Center" />
-                                    <TextBox x:Name="operationCell" Grid.Column="1" Grid.Row="5" Margin="0,0,0,0" TextWrapping="Wrap" Text="operation" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="1,1,1,1" BorderBrush="Black"/>
-									<StackPanel
-                                        
+                                    <TextBox x:Name="operationCell"
+                                             Grid.Column="1" Grid.Row="5" Margin="0,0,0,0"
+                                             TextWrapping="Wrap" Text="operation"
+                                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                             BorderThickness="1,1,1,1" BorderBrush="Black"/>
+									<StackPanel                                        
 										Grid.Column="4"
 										Grid.Row="5"
 										HorizontalAlignment="Stretch"
-										Margin="0,0,0,0"
-										Height="{Binding}"
+										Margin="0,0,0,0"										
 										Grid.ColumnSpan="2"
 										VerticalAlignment="Stretch"
 										Orientation="Vertical"
 										MinHeight="18.9"
                                         MouseWheel="AddTextBox"
+                                        Background="Green"
 										x:Name="StackTools">
                                         <Grid
 											HorizontalAlignment="Stretch"
 											Background="#FFEA41C6"
-											Margin="0,0,0,0"
-											Width="{Binding}"
-											Height="{Binding}">
+											Margin="0,0,0,0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition
 													Width="158.7" />
                                                 <ColumnDefinition
 													Width="37.0" />
                                             </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
                                             <TextBox x:Name="quantityCell"
 												Grid.Column="1"
 												Grid.Row="0"
@@ -499,8 +503,7 @@
 												Height="18.9"
 												Margin="0,0,0,0"
 												Width="{Binding}" />
-                                            <TextBox x:Name="toolsGrid"
-                                                
+                                            <TextBox x:Name="toolsCell"                                                
                                                 Grid.Column="0"
                                                 Grid.Row="0"
                                                 VerticalAlignment="Stretch"

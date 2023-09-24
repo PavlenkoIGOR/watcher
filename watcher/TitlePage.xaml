@@ -212,7 +212,7 @@
 						x:Name="УсловияРаб"
 						IsEnabled="False" />
 					<TextBox x:Name="mainToolsList"
-                             
+                             TextWrapping="Wrap"
                              Grid.Column="3"
                              Grid.Row="3"
                              BorderBrush="Black"
