@@ -97,9 +97,9 @@ namespace watcher
             }
             foreach (var item in tools)
             {
-                titlePage.mainToolsList.Text = item.Key + ", шт. - " + item.Value + Environment.NewLine;
+                //titlePage.mainToolsList.Text = item.Key + ", шт. - " + item.Value; 
+                titlePage.mainToolsList.Text = String.Join(", шт. - \n", tools);
             }
-            
         }
 
         /// <summary>
