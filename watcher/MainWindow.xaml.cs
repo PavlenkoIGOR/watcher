@@ -73,12 +73,12 @@ namespace watcher
 
 
 
-        private void Renew(object sender, RoutedEventArgs e)
+                private void Renew(object sender, RoutedEventArgs e)
         {
             Dictionary<string, string> tools = new Dictionary<string, string>();
             string textBox1Value = String.Empty;
             string textBox2Value = String.Empty;
-            int Count = 1;
+            int Count = 0;
 
             
             //titlePage.mainToolsList.Text = toolsCell.Text+", шт. - " + quantityCell.Text;
@@ -88,23 +88,26 @@ namespace watcher
             {
                 if (element is StackPanel)
                 {
+                	Count++;
                     foreach (UIElement grid in ((StackPanel)element).Children)
-                    {                    	
-                    	for (int rowIndex = 0; rowIndex < ((Grid)grid).RowDefinitions.Count; rowIndex++)
-                    	{
-                    		TextBox textBoxColumn1 = ((Grid)grid).Children.Cast<TextBox>().FirstOrDefault(c => Grid.GetRow(c) == rowIndex && Grid.GetColumn(c) == 0);
-                    		TextBox textBoxColumn2 = ((Grid)grid).Children.Cast<TextBox>().FirstOrDefault(c => Grid.GetRow(c) == rowIndex && Grid.GetColumn(c) == 1);
-                    		if (textBoxColumn1 != null && textBoxColumn2 != null)
+                    { 
+                    	if (grid is Grid)
+                    	{                    	
+                    		for (int rowIndex = 0; rowIndex <= ((Grid)grid).RowDefinitions.Count; rowIndex++)
                     		{
-                    			tools[textBoxColumn1.Text] = textBoxColumn2.Text;
+                    			TextBox textBoxColumn1 = ((Grid)grid).Children.Cast<TextBox>().FirstOrDefault(c => Grid.GetRow(c) == rowIndex && Grid.GetColumn(c) == 0);
+                    			TextBox textBoxColumn2 = ((Grid)grid).Children.Cast<TextBox>().FirstOrDefault(a => Grid.GetRow(a) == rowIndex && Grid.GetColumn(a) == 1);
+                    			if (textBoxColumn1 != null && textBoxColumn2 != null)
+                    			{
+                    				tools[textBoxColumn1.Text] = textBoxColumn2.Text;
+                    			}
                     		}
-                    	}
                     	//tools[((TextBox)(grid as Grid).Children[0]).Text] = ((TextBox)(grid as Grid).Children[1]).Text;
 //                        tools.Add(
 //                            ((TextBox)(grid as Grid).Children[0]).Text,
 //                            ((TextBox)(grid as Grid).Children[1]).Text
 //                            );
-                    	
+                    	}
                     }
                 }
             }
