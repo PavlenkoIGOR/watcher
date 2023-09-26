@@ -35,8 +35,10 @@ namespace watcher
             InputPage();
             
         }
-
-        private void InputPage()
+		/// <summary>
+		/// метод для подключения своего Frame
+		/// </summary>
+		private void InputPage()
         {
             //MainWindow mainWindow = new MainWindow();
             Frame mainFrame = this.FindName("forTitlePage") as Frame; // Найдите элемент Frame в главном окне
@@ -72,16 +74,12 @@ namespace watcher
 
 
 
-
-                private void Renew(object sender, RoutedEventArgs e)
+        private void Renew(object sender, RoutedEventArgs e)
         {
             Dictionary<string, string> tools = new Dictionary<string, string>();
             string textBox1Value = String.Empty;
             string textBox2Value = String.Empty;
             int Count = 0;
-
-            
-            //titlePage.mainToolsList.Text = toolsCell.Text+", шт. - " + quantityCell.Text;
 
             //лучше этот перебор сделать рекурсией
             foreach (UIElement element in tableWithTechProc.Children) //перечисление всех дочерних элементов у tableWithTechProc таблицы
@@ -102,11 +100,6 @@ namespace watcher
                     				tools[textBoxColumn1.Text] = textBoxColumn2.Text;
                     			}
                     		}
-                    	//tools[((TextBox)(grid as Grid).Children[0]).Text] = ((TextBox)(grid as Grid).Children[1]).Text;
-//                        tools.Add(
-//                            ((TextBox)(grid as Grid).Children[0]).Text,
-//                            ((TextBox)(grid as Grid).Children[1]).Text
-//                            );
                     	}
                     }
                 }
@@ -116,19 +109,8 @@ namespace watcher
             foreach (var item in tools)
             {            	
                 titlePage.mainToolsList.Text += item.Key + ", шт. - " + item.Value + Environment.NewLine;
-                //titlePage.mainToolsList.Text = String.Join(item + ", шт. - \n", tools.Values);
             }
         }
-
-        /// <summary>
-        /// отслеживание текста в textbox
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-
-
-
-
 
         private void Click_func(object sender, MouseButtonEventArgs e)
         {
@@ -160,10 +142,20 @@ namespace watcher
         /// </summary>
         private void AddRow(object sender, RoutedEventArgs e)
         {
+        	if (sender is Button)
+        	{
+        		//MessageBox.Show("asdasdasdasda!!!");
+        		A4_2.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(a4height) });
+        		A4_2.Height += globalHeight;
+        		A4_2.ShowGridLines = true;
+        		return;
+        	}
+        	else
+        	{
         	//MessageBox.Show("asdasdasdasda!!!");
             tableWithTechProc.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18) });
             tableWithTechProc.Height += 18;
-            tableWithTechProc.ShowGridLines = true;
+            //tableWithTechProc.ShowGridLines = true;
 
             StackPanel newStackPanel = new StackPanel
             {
@@ -174,7 +166,7 @@ namespace watcher
                 Background = Brushes.Red
             };
 
-            #region добавление в newStackPanel новые TextBox'ы
+            #region добавление в newStackPanel новую таблицу (grid[TextBox|Textbox]) TextBox'ы
             TextBox textBoxSP1 = new TextBox() { MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Text = "1" };            
             TextBox textBoxSP2 = new TextBox() { MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Text = "2" };
             textBoxSP1.MouseWheel += AddTextBox;
@@ -195,13 +187,16 @@ namespace watcher
             Grid.SetColumnSpan(newStackPanel, 2);
             tableWithTechProc.Children.Add(newStackPanel);
             #endregion
+        	}
         }
         private void AddTextBox(object sender, MouseWheelEventArgs e)
         {
             //MessageBox.Show("Работает!!!");
             Grid grid = new Grid() { };
             TextBox txt1 = new TextBox() { Name = "toolsCell", FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0,0,0,0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1,1,1,1) };
+            txt1.AddHandler(TextBox.KeyDownEvent, new KeyEventHandler(myTextBox_KeyDown));
             TextBox txt2 = new TextBox() { Name = "quantityCell", FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0,0,0,0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 1) };
+            txt2.AddHandler(TextBox.KeyDownEvent, new KeyEventHandler(myTextBox_KeyDown));
             
             grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18.9) });
             grid.ColumnDefinitions.Add(new ColumnDefinition(){ Width = new GridLength(158.7) });
@@ -210,6 +205,19 @@ namespace watcher
             grid.Children.Add(txt2);
             Grid.SetColumn(txt2, 1);
             StackTools.Children.Add(grid); //добавление в существующий  StackPanel следующей Grid
-        }
+        } 
+
+        /// <summary>
+        /// Метод для проверки клавиши Enter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+		private void myTextBox_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Enter)
+			{
+				AddTextBox(sender, null);
+			}
+		}
     }
 }
