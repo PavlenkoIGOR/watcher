@@ -107,8 +107,11 @@ namespace watcher
             titlePage.mainToolsList.Clear();
             operationCell.Text = Count.ToString();
             foreach (var item in tools)
-            {            	
-                titlePage.mainToolsList.Text += item.Key + ", шт. - " + item.Value + Environment.NewLine;
+            {          
+	       	if((item.Key != String.Empty) && (item.Value != String.Empty))
+            	{
+                	titlePage.mainToolsList.Text += item.Key + ", шт. - " + item.Value + Environment.NewLine;
+            	}
             }
         }
 
