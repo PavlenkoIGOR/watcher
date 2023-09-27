@@ -27,23 +27,31 @@ namespace watcher
         }
 
 
-        private void Click_func(object sender, MouseButtonEventArgs e)
-        {
+		private void Click_func(object sender, MouseButtonEventArgs e)
+		{
 			switch ((sender as Grid).Name)
 			{
 				case ("A4"):
-
-                    //mainTabStack.Children.Add(new TitlePage());
-                    A4.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(793.7) });
-                    A4.Height += 793.7;
-                    A4.ShowGridLines = true;
-                    break;
+					A4.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(793.7) });
+					A4.Height += 793.7;
+					A4.ShowGridLines = true;
+					break;
 //				case("A4_2"):
 //					A4_2.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(a4height) });
 //					A4_2.Height += globalHeight;
 //					A4_2.ShowGridLines = true;
 //					break;
 			}
-        }
+		}
+		
+		
+		private void myTextBox_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Enter)
+			{
+				(sender as TextBox).AppendText(Environment.NewLine); // Вставить символ новой строки
+				e.Handled = true; // Предотвратить добавление символа Enter в текстовое содержимое
+			}
+		}
     }
 }
