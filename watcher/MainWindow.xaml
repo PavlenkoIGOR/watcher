@@ -572,7 +572,7 @@
 										BorderThickness="1,1,1,1"
 										BorderBrush="Black"
 										x:Name="operationCell" />
-									<Border
+									<!--<Border
 										BorderThickness="0,0,0,1"
 										BorderBrush="Black"
 										Grid.Column="4"
@@ -581,8 +581,10 @@
 										Grid.ColumnSpan="2"
 										VerticalAlignment="Stretch"
 										MinHeight="18.9"
-										Margin="0,0,0,0">
+										Margin="0,0,0,0">-->
 										<StackPanel
+                                            Grid.Column="4"
+                                            Grid.Row="5"
 											HorizontalAlignment="Stretch"
 											Margin="0,0,0,0"
 											Height="{Binding}"
@@ -630,7 +632,7 @@
 													BorderBrush="Black" />
 											</Grid>
 										</StackPanel>
-									</Border>
+									<!--</Border>-->
 									<TextBox
 										Grid.Column="0"
 										VerticalAlignment="Stretch"
