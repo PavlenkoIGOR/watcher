@@ -42,8 +42,8 @@ namespace watcher
         {
             //MainWindow mainWindow = new MainWindow();
             Frame mainFrame = this.FindName("forTitlePage") as Frame; // Найдите элемент Frame в главном окне
-            mainFrame.Navigate(titlePage); // Загружаете вашу страницу во Frame
-            this.Show(); // Отображаете главное окно
+            mainFrame.Navigate(titlePage); // Загружаете страницу во Frame
+            this.Show(); // Отображение главного окна
         }
 
 
@@ -190,8 +190,8 @@ namespace watcher
             };
 
             #region  создание textBox'ов для Grid в stackLayout
-            TextBox textBoxSP1 = new TextBox() { MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Text = "1", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1,1,1,1), FontSize = 10, HorizontalContentAlignment = HorizontalAlignment.Left };            
-            TextBox textBoxSP2 = new TextBox() { MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Text = "2", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1,1,1,1), FontSize = 10, HorizontalContentAlignment = HorizontalAlignment.Center};
+            TextBox textBoxSP1 = new TextBox() { MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Text = "", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1,1,1,1), FontSize = 10, HorizontalContentAlignment = HorizontalAlignment.Left };            
+            TextBox textBoxSP2 = new TextBox() { MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Text = "", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1,1,1,1), FontSize = 10, HorizontalContentAlignment = HorizontalAlignment.Center};
             textBoxSP1.KeyDown += myTextBox_KeyDown;
             Grid.SetColumn(textBoxSP1, 0);
             Grid.SetColumn(textBoxSP2, 1);
@@ -288,18 +288,18 @@ namespace watcher
 				titlePage.ActualDocsGrid.Text += thisBoxName;// + Grid.GetRow(sender as TextBox);
 			}
 		}
-		
-		#region всё для создания нового листа
-		private Grid CreateMainTable()
-		{
+
+        #region всё для создания нового листа
+        private Grid CreateMainTable()
+        {
             //Создание "Основные и вспомогательные производственные операции и их последовательность"
-            TextBox tb_OpAndFoll = new TextBox() { FontSize=10, Background = new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)), BorderThickness = new Thickness(1, 1, 1, 1), BorderBrush = Brushes.Black, Text = "Основные и вспомогательные производственные операции и их последовательность", Margin = new Thickness(0, 0, 0, 0), VerticalAlignment = VerticalAlignment.Stretch, HorizontalAlignment = HorizontalAlignment.Stretch, HorizontalContentAlignment = HorizontalAlignment.Center };
+            TextBox tb_OpAndFoll = new TextBox() { FontSize = 10, Background = new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)), BorderThickness = new Thickness(1, 1, 1, 1), BorderBrush = Brushes.Black, Text = "Основные и вспомогательные производственные операции и их последовательность", Margin = new Thickness(0, 0, 0, 0), VerticalAlignment = VerticalAlignment.Stretch, HorizontalAlignment = HorizontalAlignment.Stretch, HorizontalContentAlignment = HorizontalAlignment.Center };
             Grid.SetRow(tb_OpAndFoll, 0);
             Grid.SetColumn(tb_OpAndFoll, 0);
             Grid.SetColumnSpan(tb_OpAndFoll, 8);
 
             //Создание №п/п
-            TextBox tb_PP = new TextBox() { FontSize = 10, Background = new SolidColorBrush(Color.FromArgb(255,180,180,180)), BorderThickness = new Thickness(1, 1, 1, 1), BorderBrush = Brushes.Black, TextWrapping=TextWrapping.Wrap, Text = "№ п/п", Margin = new Thickness(0, 0, 0, 0), VerticalAlignment = VerticalAlignment.Stretch, HorizontalAlignment = HorizontalAlignment.Stretch, HorizontalContentAlignment = HorizontalAlignment.Center, VerticalContentAlignment=VerticalAlignment.Center };
+            TextBox tb_PP = new TextBox() { FontSize = 10, Background = new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)), BorderThickness = new Thickness(1, 1, 1, 1), BorderBrush = Brushes.Black, TextWrapping = TextWrapping.Wrap, Text = "№ п/п", Margin = new Thickness(0, 0, 0, 0), VerticalAlignment = VerticalAlignment.Stretch, HorizontalAlignment = HorizontalAlignment.Stretch, HorizontalContentAlignment = HorizontalAlignment.Center, VerticalContentAlignment = VerticalAlignment.Center };
             Grid.SetRow(tb_PP, 1);
             Grid.SetColumn(tb_PP, 0);
             Grid.SetRowSpan(tb_PP, 2);
@@ -349,30 +349,32 @@ namespace watcher
             Grid.SetColumn(tb_Dangerous, 7);
             Grid.SetRowSpan(tb_Dangerous, 2);
 
+
+
             //создание tb6_2
-            TextBox tb6_2 = new TextBox() { FontSize = 10, Background = new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)), BorderThickness = new Thickness(1, 1, 1, 1), BorderBrush = Brushes.Black, Text = "6.2 Выполнение работы", Margin = new Thickness(0,0,0,0), VerticalAlignment = VerticalAlignment.Stretch, HorizontalAlignment = HorizontalAlignment.Stretch, HorizontalContentAlignment = HorizontalAlignment.Center };
+            TextBox tb6_2 = new TextBox() { FontSize = 10, Background = new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)), BorderThickness = new Thickness(1, 1, 1, 1), BorderBrush = Brushes.Black, Text = "6.2 Выполнение работы", Margin = new Thickness(0, 0, 0, 0), VerticalAlignment = VerticalAlignment.Stretch, HorizontalAlignment = HorizontalAlignment.Stretch, HorizontalContentAlignment = HorizontalAlignment.Center };
             Grid.SetRow(tb6_2, 4);
             Grid.SetColumn(tb6_2, 0);
             Grid.SetColumnSpan(tb6_2, 8);
 
             //таблица с Т.П.
-            Grid headGrid = new Grid(){HorizontalAlignment = HorizontalAlignment.Stretch, ShowGridLines = true};
-			headGrid.RowDefinitions.Add(new RowDefinition(){Height = new GridLength(18.9)});
-			headGrid.RowDefinitions.Add(new RowDefinition(){Height = new GridLength(18.9)});
-			headGrid.RowDefinitions.Add(new RowDefinition(){Height = new GridLength(1, GridUnitType.Star)});
-			headGrid.RowDefinitions.Add(new RowDefinition(){Height = new GridLength(18.9)});
-			headGrid.RowDefinitions.Add(new RowDefinition(){Height = new GridLength(18.9)});
+            Grid headGrid = new Grid() { HorizontalAlignment = HorizontalAlignment.Stretch, ShowGridLines = true };
             headGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18.9) });
-            headGrid.ColumnDefinitions.Add(new ColumnDefinition(){ Width = new GridLength(30)} );
-			headGrid.ColumnDefinitions.Add(new ColumnDefinition(){ Width = new GridLength(270)} );
-			headGrid.ColumnDefinitions.Add(new ColumnDefinition(){ Width = new GridLength(124)} );
-			headGrid.ColumnDefinitions.Add(new ColumnDefinition(){ Width = new GridLength(49)} );
-			headGrid.ColumnDefinitions.Add(new ColumnDefinition(){ Width = new GridLength(158.7)} );
-			headGrid.ColumnDefinitions.Add(new ColumnDefinition(){ Width = new GridLength(37)} );
-			headGrid.ColumnDefinitions.Add(new ColumnDefinition(){ Width = new GridLength(168)} );
-			headGrid.ColumnDefinitions.Add(new ColumnDefinition(){ Width = new GridLength(1, GridUnitType.Star )} );
-			Grid.SetRow(headGrid, 0);
-			Grid.SetColumn(headGrid, 1);
+            headGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18.9) });
+            headGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
+            headGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18.9) });
+            headGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18.9) });
+            headGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18.9) });
+            headGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(30) });
+            headGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(270) });
+            headGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(124) });
+            headGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(49) });
+            headGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(158.7) });
+            headGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(37) });
+            headGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(168) });
+            headGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
+            Grid.SetRow(headGrid, 0);
+            Grid.SetColumn(headGrid, 1);
             headGrid.Children.Add(tb6_2);
             headGrid.Children.Add(tb_OpAndFoll);
             headGrid.Children.Add(tb_PP);
@@ -385,12 +387,39 @@ namespace watcher
             headGrid.Children.Add(tb_Meropr);
             headGrid.Children.Add(tb_Dangerous);
 
+            //создание Textbox'ов 1-8
+            for (int i = 0; i < headGrid.ColumnDefinitions.Count; i++)
+            {
+                TextBox textBox = new TextBox() { FontSize = 10, VerticalContentAlignment = VerticalAlignment.Center, HorizontalContentAlignment = HorizontalAlignment.Center, Background = new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)), Text = $"{i + 1}", Margin = new Thickness(0, 0, 0, 0), VerticalAlignment = VerticalAlignment.Stretch, HorizontalAlignment = HorizontalAlignment.Stretch, BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 1) };
+                Grid.SetRow(textBox, 3);
+                Grid.SetColumn(textBox, i);
+                headGrid.Children.Add(textBox);
+            }
 
+            #region Кнопки добавления/удаления листов
             //Создание кнопки "Добавить новый лист"
-            Button button_AddNewList = new Button() { Height = 50, Width = 152, VerticalAlignment=VerticalAlignment.Bottom, Content = "Добавить Лист", Background = new SolidColorBrush(Colors.Bisque), BorderThickness = new Thickness(0,5,0,5), BorderBrush = new SolidColorBrush(Color.FromArgb(255, 180, 120, 120)) };
-            Grid.SetRow(button_AddNewList, A4_2.RowDefinitions.Count);
+            Button button_AddNewList = new Button() { Height = 50, Width = 152, VerticalAlignment = VerticalAlignment.Bottom, Content = "Добавить Лист", Background = new SolidColorBrush(Colors.Bisque), BorderThickness = new Thickness(0, 5, 0, 5), BorderBrush = new SolidColorBrush(Color.FromArgb(255, 180, 120, 120)) };
+            Grid.SetColumn(button_AddNewList, 0);
             button_AddNewList.Click += AddRow;
-            A4_2.Children.Add(button_AddNewList);
+
+
+            //Создание кнопки "Удалить лист"
+            Button button_DeleteSheet = new Button() { Height = 50, Width = 152, VerticalAlignment = VerticalAlignment.Bottom, Content = "Удалить Лист", Background = new SolidColorBrush(Colors.Bisque), BorderThickness = new Thickness(0, 5, 0, 5), BorderBrush = new SolidColorBrush(Color.FromArgb(255, 180, 120, 120)) };
+            Grid.SetColumn(button_DeleteSheet, 1);
+            button_DeleteSheet.Click += DeleteSheet;
+
+
+            //создание Grid для кнопок добавления/удаления листов
+            Grid gridForButton = new Grid() { VerticalAlignment=VerticalAlignment.Bottom, HorizontalAlignment=HorizontalAlignment.Center };
+            gridForButton.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
+            gridForButton.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
+            gridForButton.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
+            gridForButton.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
+            gridForButton.Children.Add(button_AddNewList);
+            gridForButton.Children.Add(button_DeleteSheet);
+            Grid.SetRow(gridForButton, A4_2.RowDefinitions.Count);
+            A4_2.Children.Add(gridForButton);
+            #endregion
 
             //Заполнение Нового листа
             Grid mainGrid1 = new Grid()
@@ -412,6 +441,34 @@ namespace watcher
 			Grid.SetRow(mainGrid1, A4_2.RowDefinitions.Count-1);
 			return mainGrid1;
 		}
-		#endregion
+        #endregion
+
+        private void DeleteSheet(object sender, RoutedEventArgs e)
+        {
+            
+            int rowIndex = 3; //????????????????
+
+            A4_2.RowDefinitions.RemoveAt(rowIndex);
+            //for (int i  = 0; i < A4_2.RowDefinitions.Count; i++)
+            //{
+            for (int i = 0; i < A4_2.Children.Count; i++)
+            {
+                UIElement element = A4_2.Children[i];
+                RowDefinition rowDefinition = A4_2.RowDefinitions[0];
+                rowDefinition.Height=new GridLength(793.7);
+                int row = Grid.GetRow(element);
+
+                if (row >= rowIndex)
+                {
+                    Grid.SetRow(element, row - 1);
+                }
+            }
+            //}
+            //A4_2.Children.Remove();
+
+            //Очистите память от удаленной строки вызовом сборщика мусора.
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
     }
 }
