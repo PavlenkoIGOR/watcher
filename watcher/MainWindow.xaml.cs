@@ -550,5 +550,16 @@ namespace watcher
             currentGrid.Children.Add(newStackPanel);
             #endregion
         }
+	
+	private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+        	// Выполните ваше действие при получении фокуса клавиатуры, например, задайте команду для вызова
+        	var focusedElement = Keyboard.FocusedElement as FrameworkElement;
+        	if (focusedElement != null)
+        	{
+        		string elementName = focusedElement.Name;
+        		// Вы можете использовать elementName в вашем коде
+        	}
+        }
     }
 }
