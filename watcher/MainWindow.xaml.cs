@@ -36,9 +36,9 @@ namespace watcher
             
         }
 	/// <summary>
-		/// метод для подключения своего Frame
-		/// </summary>
-		private void InputPage()
+	/// метод для подключения своего Frame
+	/// </summary>
+	private void InputPage()
         {
             //MainWindow mainWindow = new MainWindow();
             Frame mainFrame = this.FindName("forTitlePage") as Frame; // Найдите элемент Frame в главном окне
