@@ -24,6 +24,8 @@
 				<MenuItem
 					Header="Сохранить как..."></MenuItem>
 				<MenuItem
+					Header="Печать"></MenuItem>
+				<MenuItem
 					Header="Выход"></MenuItem>
 				<Button
 					Height="25"
