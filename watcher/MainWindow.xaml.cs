@@ -23,6 +23,7 @@ namespace watcher
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Grid A4_2_;
         private double globalHeight = 793.7d;
         private double a4height = 793.7d;
         TitlePage titlePage;
@@ -66,48 +67,27 @@ namespace watcher
 						stackPanelCount++;
 						operationCell.Text = "элемент "+ element.DependencyObjectType.Name +" найден!" + stackPanelCount + " шт " + child.GetType();
 					}
-
-					
 				}
 			}
 		}
 
+        private void IsertA4IntoScrollViever()
+        {
+            A4_2 = new Grid();
+            A4_2.RowDefinitions.Add(new RowDefinition());
+            A4_2.ColumnDefinitions.Add(new ColumnDefinition());
 
-
+            ScrollViewerForTabs.Content = A4_2;
+        }
         private void Renew(object sender, RoutedEventArgs e)
         {
             Dictionary<string, string> tools = new Dictionary<string, string>();
             string textBox1Value = String.Empty;
             string textBox2Value = String.Empty;
             int Count = 0;
-//            //foreach(UIElement elemenMain in A4_2.Children)
-//            //{
-//            //лучше этот перебор сделать рекурсией
-//            foreach (UIElement element in tableWithTechProc.Children) //перечисление всех дочерних элементов у tableWithTechProc таблицы
-//            {
-//                if (element is StackPanel)
-//                {
-//                	Count++;
-//                    foreach (UIElement grid in ((StackPanel)element).Children)
-//                    { 
-//                    	if (grid is Grid)
-//                    	{                    	
-//                    		for (int rowIndex = 0; rowIndex <= ((Grid)grid).RowDefinitions.Count; rowIndex++)
-//                    		{
-//                    			TextBox textBoxColumn1 = ((Grid)grid).Children.Cast<TextBox>().FirstOrDefault(c => Grid.GetRow(c) == rowIndex && Grid.GetColumn(c) == 0);
-//                    			TextBox textBoxColumn2 = ((Grid)grid).Children.Cast<TextBox>().FirstOrDefault(a => Grid.GetRow(a) == rowIndex && Grid.GetColumn(a) == 1);
-//                    			if (textBoxColumn1 != null && textBoxColumn2 != null)
-//                    			{
-//                    				tools[textBoxColumn1.Text] = textBoxColumn2.Text;
-//                    			}
-//                    		}
-//                    	}
-//                    }
-//                }
-//            }
-            //}
-            operationCell.Clear();
-            StringBuilder sb2 = new StringBuilder(operationCell.Text);
+
+            //operationCell.Clear();
+            //StringBuilder sb2 = new StringBuilder(operationCell.Text);
             for(int rowIndexM = 0; rowIndexM < A4_2.RowDefinitions.Count; rowIndexM++) // перебор всех листов А4 (т.е. всех строк в таблице А4_2)
             {         	      				
             	foreach(UIElement elemenTabMain in A4_2.Children) //перебор элементов//********* ((Grid)A4_2.Children[rowIndexM]).Children

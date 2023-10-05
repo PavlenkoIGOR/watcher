@@ -87,13 +87,11 @@
 				</TabItem>
 				<TabItem
 					Header="Выполнение работ">
-					<ScrollViewer
+                    <ScrollViewer x:Name="ScrollViewerForTabs"
 						HorizontalScrollBarVisibility="Visible"
 						VerticalScrollBarVisibility="Visible"
 						Foreground="#FFEDD6D6"
 						HorizontalContentAlignment="Center"
-						Grid.Row="0"
-						Grid.Column="2"
 						Height="{Binding}"
 						Width="{Binding}"
 						VerticalAlignment="Top">
@@ -588,7 +586,7 @@
 										BorderThickness="1,1,1,1"
 										BorderBrush="Black"
 										x:Name="operationCell" />
-									<!--									<Border
+																		<Border
 										BorderThickness="0,0,0,1"
 										BorderBrush="Black"
 										Grid.Column="4"
@@ -597,7 +595,7 @@
 										Grid.ColumnSpan="2"
 										VerticalAlignment="Stretch"
 										MinHeight="18.9"
-										Margin="0,0,0,0">-->
+										Margin="0,0,0,0">
 									<StackPanel
 										Grid.Column="4"
 										Grid.Row="5"
@@ -648,7 +646,7 @@
 												BorderBrush="Black" />
 										</Grid>
 									</StackPanel>
-									<!--</Border>-->
+									</Border>
 									<TextBox
 										Grid.Column="0"
 										VerticalAlignment="Stretch"
