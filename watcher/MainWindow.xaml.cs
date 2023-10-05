@@ -206,13 +206,14 @@ namespace watcher
                 A4_2.Height += globalHeight;
                 A4_2.ShowGridLines = true;
                 A4_2.Children.Add(CreateMainTable());
+
                 return;
             }
             else
             {
                 //MessageBox.Show("asdasdasdasda!!!");
-                tableWithTechProc.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18) });
-                tableWithTechProc.Height += 18;
+                tableWithTechProc.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18.9) });
+                tableWithTechProc.Height += 18.9;
                 //tableWithTechProc.ShowGridLines = true;
                 int stackpanelNameIndex = 1;
                 StackPanel newStackPanel = new StackPanel
@@ -229,7 +230,7 @@ namespace watcher
                 #region  создание textBox'ов для Grid в stackLayout
                 TextBox textBoxSP1 = new TextBox() { MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Text = "", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 1), FontSize = 10, HorizontalContentAlignment = HorizontalAlignment.Left };
                 TextBox textBoxSP2 = new TextBox() { MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Text = "", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 1), FontSize = 10, HorizontalContentAlignment = HorizontalAlignment.Center };
-                textBoxSP1.KeyDown += myTextBox_KeyDown;
+                //textBoxSP1.KeyDown += myTextBox_KeyDown;
                 Grid.SetColumn(textBoxSP1, 0);
                 Grid.SetColumn(textBoxSP2, 1);
                 #endregion
@@ -283,39 +284,7 @@ namespace watcher
             }
         }
 
-        /// <summary>
-        /// Метод для добавления TextBox'ов в Grid(в stackPanel которая)
-        /// </summary>
-        //private void AddTextBox(object sender, MouseWheelEventArgs e)
-        //{
-        //    //MessageBox.Show("Работает!!!");
-        //    Grid grid = new Grid() { };
-        //    TextBox txt1 = new TextBox() { Name = "toolsCell", FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0,0,0,0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1,1,1,1), HorizontalContentAlignment = HorizontalAlignment.Left };
-        //    txt1.AddHandler(TextBox.KeyDownEvent, new KeyEventHandler(myTextBox_KeyDown));
-        //    TextBox txt2 = new TextBox() { Name = "quantityCell", FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0,0,0,0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 1), HorizontalContentAlignment = HorizontalAlignment.Center };
-        //    txt2.AddHandler(TextBox.KeyDownEvent, new KeyEventHandler(myTextBox_KeyDown));
-
-        //    grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18.9) });
-        //    grid.ColumnDefinitions.Add(new ColumnDefinition(){ Width = new GridLength(158.7) });
-        //    grid.ColumnDefinitions.Add(new ColumnDefinition(){ Width = new GridLength(37.0) });
-        //    grid.Children.Add(txt1);
-        //    grid.Children.Add(txt2);
-        //    Grid.SetColumn(txt2, 1);
-
-        //    StackTools.Children.Add(grid); //добавление в существующий  StackPanel следующей Grid
-        //} 
-
-        /// <summary>
-        /// Метод для проверки клавиши Enter
-        /// </summary>
-        private void myTextBox_KeyDown(object sender, KeyEventArgs e)
-		{
-			if (e.Key == Key.Enter)
-			{
-				//AddTextBox(sender, null);
-			}
-		}
-		
+	
 		/// <summary>
 		/// Метод проверки в TextBox'е ли каретка
 		/// </summary>
@@ -489,6 +458,7 @@ namespace watcher
 			mainGrid1.ColumnDefinitions.Add( new ColumnDefinition() );
 			Grid.SetRow(mainGrid1, A4_2.RowDefinitions.Count-1);
             mainGrid1.Children.Add(AddSheetAndSheetsGrid());
+            
 
 			return mainGrid1;
 		}
@@ -569,10 +539,12 @@ namespace watcher
             #region  создание textBox'ов для Grid в stackLayout
             TextBox textBoxSP1 = new TextBox() { MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Text = "", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1,1,1,1), FontSize = 10, HorizontalContentAlignment = HorizontalAlignment.Left };            
             TextBox textBoxSP2 = new TextBox() { MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Text = "", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1,1,1,1), FontSize = 10, HorizontalContentAlignment = HorizontalAlignment.Center};
-            textBoxSP1.KeyDown += OnTextBoxKeyDown;
+            //textBoxSP1.KeyDown += OnTextBoxKeyDown;
+            //или так
             textBoxSP1.AddHandler(TextBox.KeyDownEvent, new KeyEventHandler(OnTextBoxKeyDown));
             textBoxSP1.TextWrapping = TextWrapping.Wrap; 
             textBoxSP1.AcceptsReturn = false;
+
             textBoxSP2.AddHandler(TextBox.KeyDownEvent, new KeyEventHandler(OnTextBoxKeyDown));
             textBoxSP2.TextWrapping = TextWrapping.Wrap;
             textBoxSP2.AcceptsReturn = false;
@@ -659,9 +631,9 @@ namespace watcher
             {
                 Grid grid = new Grid() { };
                 TextBox txt1 = new TextBox() { Name = "toolsCell", FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 1), HorizontalContentAlignment = HorizontalAlignment.Left };
-                txt1.AddHandler(TextBox.KeyDownEvent, new KeyEventHandler(myTextBox_KeyDown));
+                txt1.AddHandler(TextBox.KeyDownEvent, new KeyEventHandler(OnTextBoxKeyDown));
                 TextBox txt2 = new TextBox() { Name = "quantityCell", FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 1), HorizontalContentAlignment = HorizontalAlignment.Center };
-                txt2.AddHandler(TextBox.KeyDownEvent, new KeyEventHandler(myTextBox_KeyDown));
+                txt2.AddHandler(TextBox.KeyDownEvent, new KeyEventHandler(OnTextBoxKeyDown));
 
                 grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18.9) });
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(158.7) });
@@ -674,6 +646,7 @@ namespace watcher
                 Grid parentGrid = (sender as TextBox).Parent as Grid;
                 StackPanel stPanel = parentGrid.Parent as StackPanel;
                 stPanel.Children.Add(grid);
+                
             }
         }
     }
