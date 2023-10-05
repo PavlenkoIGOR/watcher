@@ -92,13 +92,11 @@
 						VerticalScrollBarVisibility="Visible"
 						Foreground="#FFEDD6D6"
 						HorizontalContentAlignment="Center"
-						Height="{Binding}"
-						Width="{Binding}"
 						VerticalAlignment="Top">
-						<Grid
+						<!--<Grid
 							x:Name="A4_2"
-							Width="29.7cm"
-							Height="21.0cm"
+							Width="1122.5"
+							Height="793"
 							VerticalAlignment="Top"
 							HorizontalAlignment="Stretch"
 							ShowGridLines="True"
@@ -738,7 +736,7 @@
 								BorderBrush="#FFBE2D42"
 								Foreground="Black"
 								Click="AddRow" />
-						</Grid>
+						</Grid>-->
 					</ScrollViewer>
 				</TabItem>
 			</TabControl>
