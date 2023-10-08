@@ -14,7 +14,8 @@
 			Height="1.2cm"
 			VerticalAlignment="Center"
 			VerticalContentAlignment="Center"
-			HorizontalContentAlignment="Center">
+			HorizontalContentAlignment="Center"
+            Background="SteelBlue">
 			<MenuItem
 				Header="Файл">
 				<MenuItem
