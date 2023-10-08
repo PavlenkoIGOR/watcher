@@ -26,17 +26,17 @@ namespace watcher.BLL
         /// <summary>
         /// добавляет новый лист А4
         /// </summary>
-        private void AddNewA4(object sender, RoutedEventArgs e)
+        internal void AddNewA4(object sender, RoutedEventArgs e, Grid currGrid)
         {
             //MessageBox.Show("asdasdasdasda!!!");
             if (sender is Button)
             {
-                MessageBox.Show("сработал if");
+                //MessageBox.Show("сработал if");
                 //A4_2.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(10) }); // для промежутка между листами А4
-                CreateMainTable().RowDefinitions.Add(new RowDefinition() { Height = new GridLength(a4height) });
-                CreateMainTable().Height += globalHeight;
-                CreateMainTable().ShowGridLines = true;
-                CreateMainTable().Children.Add(CreateMainTable());
+                currGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(a4height) });
+                currGrid.Height += globalHeight;
+                currGrid.ShowGridLines = true;
+                //currGrid.Children.Add(CreateMainTable());
 
                 return;
             }
@@ -158,29 +158,6 @@ namespace watcher.BLL
                 headGrid.Children.Add(textBox);
             }
 
-            #region Кнопки добавления/удаления листов
-            //Создание кнопки "Добавить новый лист"
-            Button button_AddNewList = new Button() { Height = 50, Width = 152, VerticalAlignment = VerticalAlignment.Bottom, Content = "Добавить Лист", Background = new SolidColorBrush(Colors.Bisque), BorderThickness = new Thickness(0, 5, 0, 5), BorderBrush = new SolidColorBrush(Color.FromArgb(255, 180, 120, 120)) };
-            Grid.SetColumn(button_AddNewList, 0);
-            button_AddNewList.Click += AddNewA4;
-
-            //Создание кнопки "Удалить лист"
-            Button button_DeleteSheet = new Button() { Height = 50, Width = 152, VerticalAlignment = VerticalAlignment.Bottom, Content = "Удалить Лист", Background = new SolidColorBrush(Colors.Bisque), BorderThickness = new Thickness(0, 5, 0, 5), BorderBrush = new SolidColorBrush(Color.FromArgb(255, 180, 120, 120)) };
-            Grid.SetColumn(button_DeleteSheet, 1);
-            //button_DeleteSheet.Click += DeleteSheet;
-
-            //создание Grid для кнопок добавления/удаления листов
-            Grid gridForButton = new Grid() { VerticalAlignment = VerticalAlignment.Bottom, HorizontalAlignment = HorizontalAlignment.Center };
-            gridForButton.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
-            gridForButton.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
-            gridForButton.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
-            gridForButton.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
-            gridForButton.Children.Add(button_AddNewList);
-            gridForButton.Children.Add(button_DeleteSheet);
-            //Grid.SetRow(gridForButton, A4_2.RowDefinitions.Count);
-            //A4_2.Children.Add(gridForButton);
-            #endregion
-
             //Заполнение Нового листа
             //Grid mainGrid = new Grid()
             //{
@@ -254,7 +231,6 @@ namespace watcher.BLL
             currentGrid.Children.Add(textBox_8);
         }
 
-
         ///<summary>
         ///Добавление новой строки c textBox'ами 1-4,7,8 в таблицу с Т.п. c 
         ///</summary>
@@ -288,9 +264,6 @@ namespace watcher.BLL
             CreateTextBox1_2_3_4_7_8(parentGrid);
             #endregion
         }
-
-
-
 
     }
 }

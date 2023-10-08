@@ -31,6 +31,7 @@ namespace watcher
         TitlePage titlePage;
         A4CreatingClass _A4CreatingClass = new A4CreatingClass();
         Creating2x2GridClass _creating2x2GridClass = new Creating2x2GridClass();
+        AddA4DeleteA4Class _addA4DeleteA4Class = new AddA4DeleteA4Class();
 
         private double globalHeight = 793.7d;
         private double a4height = 793.7d;
@@ -105,6 +106,11 @@ namespace watcher
             grid2x2.Children.Add(headGrid);
             grid2x2.Children.Add(sheetAndSheets);
 
+            //cсоздание таблицы с кнопками "Добавить после/удалить после"
+            Grid addA4DeleteA4 = _addA4DeleteA4Class.AddA4DeleteA4(A4);
+            Grid.SetRow(addA4DeleteA4, A4.RowDefinitions.Count - 1);
+            Grid.SetColumn(addA4DeleteA4, A4.ColumnDefinitions.Count - 1);
+
             //создание StackPanel для сетки с тех.процессом
             StackPanel stackTP = _stackCreatingClass.CreateStackPanelIntoTeckProcesstable();
             Grid.SetRow(stackTP, headGrid.RowDefinitions.Count - 1);
@@ -114,6 +120,7 @@ namespace watcher
             headGrid.Children.Add(stackTP);
            
             A4.Children.Add(grid2x2);
+            A4.Children.Add(addA4DeleteA4);
 
             ScrollViewerForTabs.Content = A4; //вставка А4
                  //вставка в А4 таблицы-разметка 2х2
