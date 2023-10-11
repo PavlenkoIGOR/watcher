@@ -11,7 +11,7 @@ using System.Windows;
 namespace watcher.BLL
 {
     
-    internal class AddA4DeleteA4Class
+    internal class AddA4DeleteA4GridClass
     {
         TechProcGridCreatingClass _techProcGridCreatingClass = new TechProcGridCreatingClass();
         internal Grid AddA4DeleteA4(Grid curentGrid)

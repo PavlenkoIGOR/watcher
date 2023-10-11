@@ -79,8 +79,8 @@ namespace watcher.BLL
                 Grid.SetColumn(txt2, 1);
 
                 Grid? parentGrid = (sender as TextBox).Parent as Grid;
-                StackPanel? stPanel = parentGrid.Parent as StackPanel;
-                stPanel.Children.Add(grid);
+                //StackPanel? stPanel = parentGrid.Parent as StackPanel;
+                (parentGrid.Parent as StackPanel).Children.Add(grid);
             }
         }
     }

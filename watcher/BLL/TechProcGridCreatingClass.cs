@@ -28,15 +28,38 @@ namespace watcher.BLL
         /// </summary>
         internal void AddNewA4(object sender, RoutedEventArgs e, Grid currGrid)
         {
-            //MessageBox.Show("asdasdasdasda!!!");
             if (sender is Button)
             {
-                //MessageBox.Show("сработал if");
                 //A4_2.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(10) }); // для промежутка между листами А4
                 currGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(a4height) });
                 currGrid.Height += globalHeight;
                 currGrid.ShowGridLines = true;
-                //currGrid.Children.Add(CreateMainTable());
+
+                SheetAndSheetsGridCreateClass sheetAndSheetsGridCreateClass = new SheetAndSheetsGridCreateClass();
+                Grid anotherSheetAndSheets = sheetAndSheetsGridCreateClass.CreateSheetAndSheetsGrid();
+                Grid.SetRow(anotherSheetAndSheets, 1);
+                Grid.SetColumn(anotherSheetAndSheets, 1);
+
+                Grid anotherHeadGrid = CreateMainTable();
+                Grid.SetRow(anotherHeadGrid, 0);
+                Grid.SetColumn(anotherHeadGrid, 1);
+
+                StackCreatingClass stackCreatingClass = new StackCreatingClass();
+                StackPanel anotherStackPanel = stackCreatingClass.CreateStackPanelIntoTeckProcesstable();
+                Grid.SetColumn(anotherStackPanel, 4);
+                Grid.SetColumnSpan(anotherStackPanel, 2);
+                Grid.SetRow(anotherStackPanel, anotherHeadGrid.RowDefinitions.Count - 1);
+
+                Creating2x2GridClass creating2X2GridClass = new Creating2x2GridClass();
+                Grid another2x2Grid = creating2X2GridClass.Creating2x2Grid();
+                Grid.SetRow(another2x2Grid, currGrid.RowDefinitions.Count - 1);
+
+                anotherHeadGrid.Children.Add(anotherStackPanel);
+                another2x2Grid.Children.Add(anotherHeadGrid);
+                another2x2Grid.Children.Add(anotherSheetAndSheets);
+
+
+                currGrid.Children.Add(another2x2Grid);
 
                 return;
             }
@@ -157,26 +180,6 @@ namespace watcher.BLL
                 Grid.SetColumn(textBox, i);
                 headGrid.Children.Add(textBox);
             }
-
-            //Заполнение Нового листа
-            //Grid mainGrid = new Grid()
-            //{
-            //    Name = "mainGrid1",
-            //    Background = new SolidColorBrush(Colors.White),
-            //    Margin = new Thickness(50, 50, 50, 50),
-            //    ShowGridLines = false,
-            //    VerticalAlignment = VerticalAlignment.Top
-            //};
-
-            //mainGrid.Children.Add(headGrid);
-
-            //mainGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Auto) });
-            //mainGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Auto) });
-            //mainGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(30) });
-            //mainGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            //Grid.SetRow(mainGrid, A4.RowDefinitions.Count - 1);
-            //mainGrid1.Children.Add(AddSheetAndSheetsGrid());
-
 
             return headGrid;
         }

@@ -31,7 +31,7 @@ namespace watcher
         TitlePage titlePage;
         A4CreatingClass _A4CreatingClass = new A4CreatingClass();
         Creating2x2GridClass _creating2x2GridClass = new Creating2x2GridClass();
-        AddA4DeleteA4Class _addA4DeleteA4Class = new AddA4DeleteA4Class();
+        AddA4DeleteA4GridClass _addA4DeleteA4Class = new AddA4DeleteA4GridClass();
 
         private double globalHeight = 793.7d;
         private double a4height = 793.7d;
