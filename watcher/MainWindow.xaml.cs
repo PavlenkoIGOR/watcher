@@ -270,7 +270,8 @@ namespace watcher
         /// </summary>
         private void GoPrinting(object sender, RoutedEventArgs e)
         {
-        	
+        	PrintDialog printDialog = new PrintDialog();
+            printDialog.ShowDialog();
         }
 
         
