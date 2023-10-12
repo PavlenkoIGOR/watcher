@@ -191,12 +191,12 @@ namespace watcher.BLL
         private void CreateTextBox1_2_3_4_7_8(Grid currentGrid)
         {
             //1
-            TextBox textBox_1 = new TextBox() { AcceptsReturn = true, MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), Text = "№", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 2), FontSize = 10, TextWrapping = TextWrapping.Wrap };
+            TextBox textBox_1 = new TextBox() { AcceptsReturn = true, MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), Text = "№", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 0, 1, 2), FontSize = 10, TextWrapping = TextWrapping.Wrap };
             Grid.SetColumn(textBox_1, 0);
             Grid.SetRow(textBox_1, currentGrid.RowDefinitions.Count - 1);
             currentGrid.Children.Add(textBox_1);
             //2
-            TextBox textBox_2 = new TextBox() { AcceptsReturn = true, MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), Text = "Новая операция", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 2), FontSize = 10, TextWrapping = TextWrapping.Wrap };
+            TextBox textBox_2 = new TextBox() { AcceptsReturn = true, MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), Text = "Новая операция", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 0, 1, 2), FontSize = 10, TextWrapping = TextWrapping.Wrap };
             textBox_2.SpellCheck.IsEnabled = true;
             Grid.SetColumn(textBox_2, 1);
             Grid.SetRow(textBox_2, currentGrid.RowDefinitions.Count - 1);
@@ -213,22 +213,22 @@ namespace watcher.BLL
 
             currentGrid.Children.Add(textBox_2);
             //3
-            TextBox textBox_3 = new TextBox() { AcceptsReturn = true, MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), Text = "Должности", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 2), FontSize = 10, TextWrapping = TextWrapping.Wrap };
+            TextBox textBox_3 = new TextBox() { AcceptsReturn = true, MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), Text = "Должности", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 0, 1, 2), FontSize = 10, TextWrapping = TextWrapping.Wrap };
             Grid.SetColumn(textBox_3, 2);
             Grid.SetRow(textBox_3, currentGrid.RowDefinitions.Count - 1);
             currentGrid.Children.Add(textBox_3);
             //4
-            TextBox textBox_4 = new TextBox() { AcceptsReturn = true, MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), Text = "", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 2), FontSize = 10, TextWrapping = TextWrapping.Wrap };
+            TextBox textBox_4 = new TextBox() { AcceptsReturn = true, MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), Text = "", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 0, 1, 2), FontSize = 10, TextWrapping = TextWrapping.Wrap };
             Grid.SetColumn(textBox_4, 3);
             Grid.SetRow(textBox_4, currentGrid.RowDefinitions.Count - 1);
             currentGrid.Children.Add(textBox_4);
             //7
-            TextBox textBox_7 = new TextBox() { AcceptsReturn = true, MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), Text = "", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 2), FontSize = 10, TextWrapping = TextWrapping.Wrap };
+            TextBox textBox_7 = new TextBox() { AcceptsReturn = true, MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), Text = "", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 0, 1, 2), FontSize = 10, TextWrapping = TextWrapping.Wrap };
             Grid.SetColumn(textBox_7, 6);
             Grid.SetRow(textBox_7, currentGrid.RowDefinitions.Count - 1);
             currentGrid.Children.Add(textBox_7);
             //8
-            TextBox textBox_8 = new TextBox() { AcceptsReturn = true, MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), Text = "", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 2), FontSize = 10, TextWrapping = TextWrapping.Wrap };
+            TextBox textBox_8 = new TextBox() { AcceptsReturn = true, MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), Text = "", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 0, 2, 2), FontSize = 10, TextWrapping = TextWrapping.Wrap };
             Grid.SetColumn(textBox_8, 7);
             Grid.SetRow(textBox_8, currentGrid.RowDefinitions.Count - 1);
             currentGrid.Children.Add(textBox_8);
@@ -243,16 +243,10 @@ namespace watcher.BLL
             ContextMenu? contextMenu = ((MenuItem)sender).Parent as ContextMenu;
 
             // Получаем TextBox, которому принадлежит контекстное меню
-            TextBox? textBox = contextMenu.PlacementTarget as TextBox;
-            Grid? parentGrid = textBox.Parent as Grid;
-            if (parentGrid != null) { MessageBox.Show("!"); }
-            else
-            {
-                MessageBox.Show("null");
-            }
-            parentGrid.RowDefinitions.Add(new RowDefinition() { Height = 18.9 });
+            TextBox textBox = contextMenu.PlacementTarget as TextBox;
+            Grid parentGrid = textBox.Parent as Grid;
+            parentGrid.RowDefinitions.Add(new RowDefinition() { });
             parentGrid.Height += 18.9;
-            //tableWithTechProc.ShowGridLines = true;
             int stackpanelNameIndex = 1;
 
             StackCreatingClass newSP = new StackCreatingClass();

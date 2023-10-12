@@ -25,14 +25,13 @@ namespace watcher.BLL
                 Margin = new Thickness(0),
                 VerticalAlignment = VerticalAlignment.Stretch,
                 HorizontalAlignment = HorizontalAlignment.Stretch,
-                Background = Brushes.Red,
                 IsEnabled = true,
                 Name = "stackPanel"
             };
 
             #region  создание textBox'ов для Grid в stackLayout
-            TextBox textBoxSP1 = new TextBox() { MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Text = "", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 1), FontSize = 10, HorizontalContentAlignment = HorizontalAlignment.Left };
-            TextBox textBoxSP2 = new TextBox() { MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Text = "", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 1), FontSize = 10, HorizontalContentAlignment = HorizontalAlignment.Center };
+            TextBox textBoxSP1 = new TextBox() { MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Text = "", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 0, 1, 2), FontSize = 10, HorizontalContentAlignment = HorizontalAlignment.Left };
+            TextBox textBoxSP2 = new TextBox() { MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Text = "", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 0, 1, 2), FontSize = 10, HorizontalContentAlignment = HorizontalAlignment.Center };
             //textBoxSP1.KeyDown += OnTextBoxKeyDown;
             //или так
             textBoxSP1.AddHandler(TextBox.KeyDownEvent, new KeyEventHandler(AddTextBoxIntoStackPanel));
@@ -66,12 +65,12 @@ namespace watcher.BLL
             if (e.Key == Key.Enter)
             {
 					Grid grid = new Grid() { };
-					TextBox txt1 = new TextBox() { Name = "toolsCell", FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 1), HorizontalContentAlignment = HorizontalAlignment.Left };
+					TextBox txt1 = new TextBox() { Name = "toolsCell", FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 0, 1, 2), HorizontalContentAlignment = HorizontalAlignment.Left };
 					txt1.AddHandler(TextBox.KeyDownEvent, new KeyEventHandler(AddTextBoxIntoStackPanel));
-					TextBox txt2 = new TextBox() { Name = "quantityCell", FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 1), HorizontalContentAlignment = HorizontalAlignment.Center };
+					TextBox txt2 = new TextBox() { Name = "quantityCell", FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 0, 1, 2), HorizontalContentAlignment = HorizontalAlignment.Center };
 					txt2.AddHandler(TextBox.KeyDownEvent, new KeyEventHandler(AddTextBoxIntoStackPanel));
 					
-					grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18.9) });
+					grid.RowDefinitions.Add(new RowDefinition() { /*Height = new GridLength(18.9)*/ });
 					grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(158.7) });
 					grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(37.0) });
 					grid.Children.Add(txt1);
