@@ -17,24 +17,24 @@ namespace watcher.BLL
         /// <returns>Grid</returns>
         internal Grid CreateSheetAndSheetsGrid()
         {
-            TextBox tBoxNumber = new TextBox() { FontSize = 10, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Background = new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)) };
+            TextBox tBoxNumber = new TextBox() { FontSize = 10, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Background = new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)), BorderThickness = new Thickness(2, 0, 2, 1), BorderBrush = Brushes.Black };
             Grid.SetRow(tBoxNumber, 0);
             Grid.SetColumn(tBoxNumber, 0);
             Grid.SetColumnSpan(tBoxNumber, 2);
 
-            TextBox tSheet = new TextBox() { FontSize = 10, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Background = new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)), Text = "Лист", VerticalContentAlignment = VerticalAlignment.Center, HorizontalContentAlignment = HorizontalAlignment.Center };
+            TextBox tSheet = new TextBox() { FontSize = 10, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Background = new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)), Text = "Лист", VerticalContentAlignment = VerticalAlignment.Center, HorizontalContentAlignment = HorizontalAlignment.Center, BorderThickness = new Thickness(2, 1, 1, 1), BorderBrush = Brushes.Black };
             Grid.SetRow(tSheet, 1);
             Grid.SetColumn(tSheet, 0);
 
-            TextBox tSheets = new TextBox() { FontSize = 10, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Background = new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)), Text = "Листов", VerticalContentAlignment = VerticalAlignment.Center, HorizontalContentAlignment = HorizontalAlignment.Center };
+            TextBox tSheets = new TextBox() { FontSize = 10, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Background = new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)), Text = "Листов", VerticalContentAlignment = VerticalAlignment.Center, HorizontalContentAlignment = HorizontalAlignment.Center, BorderThickness = new Thickness(1, 1, 2, 1), BorderBrush = Brushes.Black };
             Grid.SetRow(tSheets, 1);
             Grid.SetColumn(tSheets, 1);
 
-            TextBox tSheetNumber = new TextBox() { FontSize = 10, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Background = Brushes.White, Text = "№Листа", VerticalContentAlignment = VerticalAlignment.Center, HorizontalContentAlignment = HorizontalAlignment.Center };
+            TextBox tSheetNumber = new TextBox() { FontSize = 10, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Background = Brushes.White, Text = "№Листа", VerticalContentAlignment = VerticalAlignment.Center, HorizontalContentAlignment = HorizontalAlignment.Center, BorderThickness = new Thickness(2, 1, 1, 2), BorderBrush = Brushes.Black };
             Grid.SetRow(tSheetNumber, 2);
             Grid.SetColumn(tSheetNumber, 0);
 
-            TextBox tSheetsNumber = new TextBox() { FontSize = 10, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Background = Brushes.White, Text = "Кол-во", VerticalContentAlignment = VerticalAlignment.Center, HorizontalContentAlignment = HorizontalAlignment.Center };
+            TextBox tSheetsNumber = new TextBox() { FontSize = 10, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Background = Brushes.White, Text = "Кол-во", VerticalContentAlignment = VerticalAlignment.Center, HorizontalContentAlignment = HorizontalAlignment.Center, BorderThickness = new Thickness(1, 1, 2, 2), BorderBrush = Brushes.Black };
             Grid.SetRow(tSheetsNumber, 2);
             Grid.SetColumn(tSheetsNumber, 1);
 
