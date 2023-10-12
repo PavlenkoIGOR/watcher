@@ -65,22 +65,22 @@ namespace watcher.BLL
         {
             if (e.Key == Key.Enter)
             {
-                Grid grid = new Grid() { };
-                TextBox txt1 = new TextBox() { Name = "toolsCell", FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 1), HorizontalContentAlignment = HorizontalAlignment.Left };
-                txt1.AddHandler(TextBox.KeyDownEvent, new KeyEventHandler(AddTextBoxIntoStackPanel));
-                TextBox txt2 = new TextBox() { Name = "quantityCell", FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 1), HorizontalContentAlignment = HorizontalAlignment.Center };
-                txt2.AddHandler(TextBox.KeyDownEvent, new KeyEventHandler(AddTextBoxIntoStackPanel));
+					Grid grid = new Grid() { };
+					TextBox txt1 = new TextBox() { Name = "toolsCell", FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 1), HorizontalContentAlignment = HorizontalAlignment.Left };
+					txt1.AddHandler(TextBox.KeyDownEvent, new KeyEventHandler(AddTextBoxIntoStackPanel));
+					TextBox txt2 = new TextBox() { Name = "quantityCell", FontSize = 10, Height = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 1, 1, 1), HorizontalContentAlignment = HorizontalAlignment.Center };
+					txt2.AddHandler(TextBox.KeyDownEvent, new KeyEventHandler(AddTextBoxIntoStackPanel));
+					
+					grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18.9) });
+					grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(158.7) });
+					grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(37.0) });
+					grid.Children.Add(txt1);
+					grid.Children.Add(txt2);
+					Grid.SetColumn(txt2, 1);
 
-                grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18.9) });
-                grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(158.7) });
-                grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(37.0) });
-                grid.Children.Add(txt1);
-                grid.Children.Add(txt2);
-                Grid.SetColumn(txt2, 1);
-
-                Grid? parentGrid = (sender as TextBox).Parent as Grid;
-                //StackPanel? stPanel = parentGrid.Parent as StackPanel;
-                (parentGrid.Parent as StackPanel).Children.Add(grid);
+					Grid parentGrid = (sender as TextBox).Parent as Grid;
+					StackPanel stPanel = parentGrid.Parent as StackPanel;
+					stPanel.Children.Add(grid);
             }
         }
     }
