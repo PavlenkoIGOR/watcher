@@ -270,8 +270,12 @@ namespace watcher
         /// </summary>
         private void GoPrinting(object sender, RoutedEventArgs e)
         {
-        	PrintDialog printDialog = new PrintDialog();
-            printDialog.ShowDialog();
+            TabItem tabForPrint = execProcTab;
+            PrintDialog printDialog = new PrintDialog();
+            if (printDialog.ShowDialog() == true)
+            {
+                printDialog.PrintVisual(tabForPrint.Content as Visual, "Печать содержимого TabItem");
+            }
         }
 
         

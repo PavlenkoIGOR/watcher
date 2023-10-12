@@ -90,7 +90,7 @@
 				<TabItem
 					x:Name="execProcTab"
 					Header="Выполнение работ">
-					<ScrollViewer
+                    <ScrollViewer
 						x:Name="ScrollViewerForTabs"
 						HorizontalScrollBarVisibility="Visible"
 						VerticalScrollBarVisibility="Visible"
@@ -99,27 +99,7 @@
 						Grid.Row="0"
 						Grid.Column="2"
 						VerticalAlignment="Top">
-<!--						<Grid
-							x:Name="A4_2"
-							Width="29.7cm"
-							Height="21.0cm"
-							VerticalAlignment="Top"
-							HorizontalAlignment="Stretch"
-							ShowGridLines="True"
-							Background="Bisque">
-							<Grid.RowDefinitions>
-								<RowDefinition />
-							</Grid.RowDefinitions>
-							<Grid.ContextMenu>
-								<ContextMenu>
-									<MenuItem
-										Header="Добавить строку" />
-									<MenuItem
-										Header="Удалить строку" />
-								</ContextMenu>
-							</Grid.ContextMenu>
-						</Grid>-->
-					</ScrollViewer>
+                    </ScrollViewer>
 				</TabItem>
 			</TabControl>
 		</SelectiveScrollingGrid>
