@@ -250,7 +250,7 @@ namespace watcher.BLL
             {
                 MessageBox.Show("null");
             }
-            parentGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18.9) });
+            parentGrid.RowDefinitions.Add(new RowDefinition() { Height = 18.9 });
             parentGrid.Height += 18.9;
             //tableWithTechProc.ShowGridLines = true;
             int stackpanelNameIndex = 1;
