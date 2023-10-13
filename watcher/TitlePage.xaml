@@ -8,25 +8,25 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TitlePage">
 
-		<ScrollViewer
+			<ScrollViewer
 		HorizontalScrollBarVisibility="Visible"
 		VerticalScrollBarVisibility="Visible"
-		Foreground="#FFEDD6D6"
 		HorizontalContentAlignment="Center"
 		Grid.Row="0"
 		Grid.Column="2"
 		Height="{Binding}"
 		Width="{Binding}"
-		VerticalAlignment="Top">
+		VerticalAlignment="Top"
+		Foreground="{x:Null}">
 		<Grid
 			Width="29.7cm"
 			Height="21.0cm"
-			Background="Bisque"
 			VerticalAlignment="Top"
 			HorizontalAlignment="Stretch"
 			x:Name="A4"
 			MouseLeftButtonDown="Click_func"
-			ShowGridLines="True">
+			ShowGridLines="True"
+			Background="{x:Null}">
 			<Grid.RowDefinitions>
 				<RowDefinition />
 			</Grid.RowDefinitions>
@@ -40,9 +40,14 @@
 				ShowGridLines="False">
 				<Grid.RowDefinitions>
 					<RowDefinition
+						x:Name="NumberOfCard"
 						Height="0.5cm" />
 					<RowDefinition
 						Height="0.5cm" />
+					<RowDefinition
+						Height="0.5cm" />
+					<RowDefinition
+						Height="Auto" />
 					<RowDefinition
 						Height="1.2cm" />
 					<RowDefinition
@@ -64,12 +69,12 @@
 				<Grid
 					x:Name="numberAndListsTitle"
 					Grid.Column="4"
-					Grid.Row="4"
 					Background="#FFFF7D7D"
 					VerticalAlignment="Top"
 					HorizontalAlignment="Right"
 					IsEnabled="True"
-					ShowGridLines="False">
+					ShowGridLines="False"
+					Grid.Row="5">
 					<Grid.RowDefinitions>
 						<RowDefinition
 							Height="0.5cm" />
@@ -96,9 +101,9 @@
 						Text="Листов"
 						x:Name="Листов"
 						FontSize="11"
-						Background="#FFBCBCBC"
 						HorizontalContentAlignment="Center"
-						BorderThickness="1,0,2,1" />
+						BorderThickness="1,0,2,1"
+						Background="#FFD7D7D7" />
 					<TextBox
 						BorderBrush="Black"
 						x:Name="колвоЛистов"
@@ -132,32 +137,32 @@
 						Grid.RowSpan="1"
 						Text="Лист"
 						FontSize="11"
-						Background="#FFB4B4B4"
 						BorderThickness="2,0,1,1"
 						HorizontalContentAlignment="Center"
-						VerticalContentAlignment="Center" />
+						VerticalContentAlignment="Center"
+						Background="#FFD7D7D7" />
 				</Grid>
 				<TextBox
 					Text="1"
 					Grid.Column="0"
-					Grid.Row="0"
+					Grid.Row="1"
 					Height="{Binding}"
 					HorizontalAlignment="Stretch"
-					Margin="0,0,0,0"
-					VerticalAlignment="Stretch"
 					Width="{Binding}"
 					Grid.ColumnSpan="1"
 					Grid.RowSpan="1"
-					Background="#FFBCBCBC"
 					x:Name="Row1"
 					VerticalContentAlignment="Center"
 					HorizontalContentAlignment="Center"
 					BorderBrush="Black"
 					IsEnabled="True"
-					BorderThickness="2,2,1,1" />
+					BorderThickness="2,2,1,1"
+					VerticalAlignment="Bottom"
+					Margin="0,0,0,0"
+					Background="#FFD7D7D7" />
 				<TextBox
 					Grid.Column="1"
-					Grid.Row="0"
+					Grid.Row="1"
 					Grid.RowSpan="1"
 					Margin="0,0,0,0"
 					Width="{Binding}"
@@ -165,37 +170,37 @@
 					Grid.ColumnSpan="2"
 					HorizontalAlignment="Stretch"
 					BorderBrush="Black"
-					Background="#FFBCBCBC"
 					x:Name="НаименованиеРабот"
 					Text="Наименование работ"
 					VerticalContentAlignment="Center"
 					VerticalAlignment="Stretch"
 					IsEnabled="True"
-					BorderThickness="1,2,1,1" />
+					BorderThickness="1,2,1,1"
+					Background="#FFD7D7D7" />
 				<TextBox
 					Grid.Column="3"
-					Grid.Row="2"
 					Height="{Binding}"
 					Margin="0,0,0,0"
 					VerticalAlignment="Stretch"
 					HorizontalAlignment="Stretch"
 					Grid.RowSpan="1"
 					BorderBrush="Black"
-					Background="#FFBCBCBC"
 					Text="Перечень применяемого оборудования, приспособлений, инструментов, инвентаря и СИЗ"
 					TextWrapping="Wrap"
 					VerticalContentAlignment="Center"
 					HorizontalContentAlignment="Center"
 					x:Name="ПереченьИнстр"
-					IsEnabled="True" />
+					IsEnabled="True"
+					Grid.Row="3"
+					Background="#FFD7D7D7"
+					FontFamily="Arial"
+					FontSize="11" />
 				<TextBox
 					Grid.Column="4"
-					Grid.Row="2"
 					BorderBrush="Black"
 					Height="{Binding}"
 					Margin="0,0,0,0"
 					Width="{Binding}"
-					Background="#FFBCBCBC"
 					VerticalAlignment="Stretch"
 					HorizontalAlignment="Stretch"
 					Text="Перечень нормативных документов"
@@ -204,10 +209,13 @@
 					HorizontalContentAlignment="Center"
 					VerticalContentAlignment="Center"
 					BorderThickness="1,1,2,1"
-					IsEnabled="True" />
+					IsEnabled="True"
+					Grid.Row="3"
+					Background="#FFD7D7D7"
+					FontFamily="Arial"
+					FontSize="11" />
 				<TextBox
 					Grid.Column="2"
-					Grid.Row="2"
 					HorizontalAlignment="Stretch"
 					BorderBrush="Black"
 					VerticalAlignment="Stretch"
@@ -217,14 +225,16 @@
 					VerticalContentAlignment="Center"
 					Height="{Binding}"
 					Text="Условия работы"
-					Background="#FFBCBCBC"
 					x:Name="УсловияРаб"
 					IsEnabled="True"
-					TextWrapping="Wrap"				/>
+					TextWrapping="Wrap"
+					Grid.Row="3"
+					FontFamily="Arial"
+					FontSize="11"
+					Background="#FFD7D7D7" />
 				<TextBox
 					x:Name="mainToolsList"
 					Grid.Column="3"
-					Grid.Row="3"
 					BorderBrush="Black"
 					Grid.RowSpan="1"
 					Height="{Binding}"
@@ -234,11 +244,11 @@
 					HorizontalAlignment="Stretch"
 					BorderThickness="1,1,1,2"
 					AcceptsReturn="True"
-					TextWrapping="Wrap"	/>
+					TextWrapping="Wrap"
+					Grid.Row="4" />
 				<TextBox
 					x:Name="ActualDocsGrid"
 					Grid.Column="4"
-					Grid.Row="3"
 					BorderBrush="Black"
 					Grid.RowSpan="1"
 					Height="{Binding}"
@@ -248,20 +258,22 @@
 					Margin="0,0,0,0"
 					BorderThickness="1,1,2,2"
 					AcceptsReturn="True"
-					TextWrapping="Wrap"/>
+					TextWrapping="Wrap"
+					Grid.Row="4" />
 				<TextBox
 					Grid.Column="2"
-					Grid.Row="3"
 					Margin="0,0,0,0"
 					Height="{Binding}"
 					VerticalAlignment="Stretch"
 					HorizontalAlignment="Stretch"
 					Grid.RowSpan="1"
 					BorderBrush="Black"
-					BorderThickness="1,1,1,2" />
+					BorderThickness="1,1,1,2"
+					Grid.Row="4"
+					x:Name="SUOT" />
 				<TextBox
 					Grid.Column="3"
-					Grid.Row="0"
+					Grid.Row="1"
 					Grid.RowSpan="1"
 					Height="{Binding}"
 					Width="{Binding}"
@@ -275,7 +287,6 @@
 					BorderThickness="1,2,2,1" />
 				<TextBox
 					Grid.Column="3"
-					Grid.Row="1"
 					BorderBrush="Black"
 					x:Name="Цех"
 					Margin="0,0,0,0"
@@ -286,11 +297,11 @@
 					VerticalContentAlignment="Center"
 					Height="{Binding}"
 					Grid.RowSpan="1"
-					BorderThickness="1,1,2,1" />
+					BorderThickness="1,1,2,1"
+					Grid.Row="2" />
 				<TextBox
 					Grid.Column="1"
 					Grid.ColumnSpan="2"
-					Grid.Row="1"
 					BorderBrush="Black"
 					Height="{Binding}"
 					Width="{Binding}"
@@ -298,13 +309,16 @@
 					HorizontalAlignment="Stretch"
 					VerticalAlignment="Stretch"
 					Grid.RowSpan="1"
-					Background="#FFBCBCBC"
 					Text="Область применения"
 					x:Name="ОблПрим"
-					IsEnabled="True" />
+					IsEnabled="True"
+					Grid.Row="2"
+					Background="#FFD7D7D7"
+					FontSize="11"
+					FontFamily="Arial"
+					VerticalContentAlignment="Center" />
 				<TextBox
 					Grid.Column="1"
-					Grid.Row="2"
 					BorderBrush="Black"
 					Grid.ColumnSpan="1"
 					Height="{Binding}"
@@ -319,10 +333,10 @@
 					x:Name="пп"
 					FontSize="10"
 					IsEnabled="True"
-					Background="#FFBCBCBC" />
+					Grid.Row="3"
+					Background="#FFD7D7D7" />
 				<TextBox
 					Grid.Column="0"
-					Grid.Row="1"
 					Text="2"
 					Height="{Binding}"
 					Width="{Binding}"
@@ -335,14 +349,15 @@
 					HorizontalContentAlignment="Center"
 					Margin="0,0,0,0"
 					BorderBrush="Black"
-					Background="#FFBCBCBC"
 					x:Name="Row2"
 					IsEnabled="True"
-					BorderThickness="2,1,1,1" />
+					BorderThickness="2,1,1,1"
+					Grid.Row="2"
+					FontSize="11"
+					Background="#FFD7D7D7" />
 				<TextBox
 					x:Name="пп1"
 					Grid.Column="1"
-					Grid.Row="3"
 					BorderBrush="Black"
 					Grid.RowSpan="1"
 					Grid.ColumnSpan="1"
@@ -350,12 +365,11 @@
 					HorizontalAlignment="Stretch"
 					HorizontalContentAlignment="Center"
 					VerticalAlignment="Stretch"
-					BorderThickness="1,1,1,2" />
+					BorderThickness="1,1,1,2"
+					Grid.Row="4" />
 				<TextBox
 					Grid.Column="0"
 					BorderBrush="Black"
-					Background="#FFB4B4B4"
-					Grid.Row="2"
 					Margin="0,0,0,0"
 					HorizontalAlignment="Stretch"
 					VerticalAlignment="Stretch"
@@ -364,9 +378,27 @@
 					VerticalContentAlignment="Center"
 					HorizontalContentAlignment="Center"
 					BorderThickness="2,1,1,2"
-					x:Name="Cell_3" />
+					x:Name="Row3"
+					Grid.Row="3"
+					Background="#FFD7D7D7" />
+				<TextBox
+					BorderBrush="Black"
+					BorderThickness="1,0,1,0"
+					FontSize="10"
+					FontWeight="Bold"
+					Text="№"
+					HorizontalContentAlignment="Center"
+					VerticalContentAlignment="Center"
+					x:Name="NumOfTC"
+					Grid.Column="0"
+					Grid.ColumnSpan="5"
+					Grid.Row="0"
+					HorizontalAlignment="Stretch"
+					VerticalAlignment="Stretch"
+					Margin="0,0,0,0"
+					Grid.RowSpan="1"
+					FontFamily="Arial" />
 			</Grid>
 		</Grid>
 	</ScrollViewer>
-
 </Page>
