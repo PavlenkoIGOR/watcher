@@ -191,7 +191,7 @@ namespace watcher.BLL
         private void CreateTextBox1_2_3_4_7_8(Grid currentGrid)
         {
             //1
-            TextBox textBox_1 = new TextBox() { AcceptsReturn = true, MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), Text = "№", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 0, 1, 2), FontSize = 10, TextWrapping = TextWrapping.Wrap };
+            TextBox textBox_1 = new TextBox() { Name="NumOfRow", AcceptsReturn = true, MinHeight = 18.9, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Margin = new Thickness(0, 0, 0, 0), Text = "№", BorderBrush = Brushes.Black, BorderThickness = new Thickness(1, 0, 1, 2), FontSize = 10, TextWrapping = TextWrapping.Wrap };
             Grid.SetColumn(textBox_1, 0);
             Grid.SetRow(textBox_1, currentGrid.RowDefinitions.Count - 1);
             currentGrid.Children.Add(textBox_1);
