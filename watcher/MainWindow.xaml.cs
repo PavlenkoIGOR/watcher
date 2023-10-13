@@ -24,6 +24,9 @@ namespace watcher
     /// </summary>
     public partial class MainWindow : Window
     {
+    		//для работы с текстбоксами "NumOfRow"		
+		List <TextBox> NumsOfRowsList = new List<TextBox>();
+		int countTB=1;
         Grid A4;
         SheetAndSheetsGridCreateClass _sheetsAndSheet = new SheetAndSheetsGridCreateClass();
         StackCreatingClass _stackCreatingClass = new StackCreatingClass();
@@ -60,25 +63,31 @@ namespace watcher
             this.Show(); // Отображаете главное окно
         }
 
-        //перебор элементов
+
+        //перебор элементов !!!!!!!!!!!!!!!!!!!!Этот метод можно использовать для сериализации всех данных отрисовки в иерархии визуального объекта.
+        /// <summary>
+        /// Метод, устанавливающий номера строк с ТП
+        /// </summary>
+        [Serializable]
 		private void RecursivelyProcessVisualTree(DependencyObject element)
 		{
 			// Проверка, является ли элемент контейнером
 			if (element is Visual)
 			{
-				// Обработка текущего элемента
-				
 				// Рекурсивный обход дочерних элементов
 				for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
-				{
-					DependencyObject child = VisualTreeHelper.GetChild(element, i);
-					RecursivelyProcessVisualTree(child);
-					if(element is StackPanel)
-					{
-						int stackPanelCount = 0;
-						stackPanelCount++;
-						//operationCell.Text = "элемент "+ element.DependencyObjectType.Name +" найден!" + stackPanelCount + " шт " + child.GetType();
+				{					
+					if((element is TextBox) && (element as TextBox).Name == "NumOfRow")
+					{						
+						countTB++;	
+						(element as TextBox).Text = countTB.ToString();
+						MessageBox.Show("текстбокс с именем 'NumOfRow' найден");
 					}
+					else
+					{
+						DependencyObject child = VisualTreeHelper.GetChild(element, i);
+						RecursivelyProcessVisualTree(child);
+					}					
 				}
 			}
 		}
@@ -170,6 +179,8 @@ namespace watcher
                         }
                     }
                 }
+		countTB = 0;
+  		RecursivelyProcessVisualTree(A4);
             }
             titlePage.mainToolsList.Clear();
             StringBuilder sb = new StringBuilder(titlePage.mainToolsList.Text);
