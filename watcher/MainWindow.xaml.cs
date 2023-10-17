@@ -68,7 +68,7 @@ namespace watcher
         /// <summary>
         /// Метод, устанавливающий номера строк с ТП
         /// </summary>
-        [Serializable]
+        ///[Serializable]
 		private void RecursivelyProcessVisualTree(DependencyObject element)
 		{
 			// Проверка, является ли элемент контейнером
