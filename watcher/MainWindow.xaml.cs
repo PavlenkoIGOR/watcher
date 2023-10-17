@@ -224,26 +224,6 @@ namespace watcher
 			}
 		}
 
-        /// <summary>
-        /// Метод удаления листов
-        /// </summary>
-        private void DeleteSheet(object sender, RoutedEventArgs e)
-        {            
-            int rowIndex = _A4CreatingClass.CreatA4().RowDefinitions.Count-1;
-
-            _A4CreatingClass.CreatA4().RowDefinitions.RemoveAt(rowIndex);//удаление по индексу
-
-            for (int i = 0; i < _A4CreatingClass.CreatA4().RowDefinitions.Count; i++)
-            {
-            	UIElement element = _A4CreatingClass.CreatA4().Children[i];
-                _A4CreatingClass.CreatA4().RowDefinitions[i].Height=new GridLength(793.7);
-                _A4CreatingClass.CreatA4().Height = _A4CreatingClass.CreatA4().RowDefinitions.Count * 793.7;
-            }
-
-            //Очистка памяти от удаленной строки вызовом сборщика мусора.
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-        }
 
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
