@@ -58,7 +58,7 @@ namespace watcher
 	private void InputPage()
         {
             //MainWindow mainWindow = new MainWindow();
-            Frame? mainFrame = this.FindName("forTitlePage") as Frame; // Найдите элемент Frame в главном окне
+            Frame mainFrame = this.FindName("forTitlePage") as Frame; // Найдите элемент Frame в главном окне
             mainFrame.Navigate(titlePage); // Загружаете вашу страницу во Frame
             this.Show(); // Отображаете главное окно
         }
@@ -68,7 +68,6 @@ namespace watcher
         /// <summary>
         /// Метод, устанавливающий номера строк с ТП
         /// </summary>
-        [Serializable]
 		private void RecursivelyProcessVisualTree(DependencyObject element)
 		{
 			// Проверка, является ли элемент контейнером
@@ -81,7 +80,6 @@ namespace watcher
 					{						
 						countTB++;	
 						(element as TextBox).Text = countTB.ToString();
-						MessageBox.Show("текстбокс с именем 'NumOfRow' найден");
 					}
 					else
 					{
@@ -179,9 +177,9 @@ namespace watcher
                         }
                     }
                 }
-		countTB = 0;
-  		RecursivelyProcessVisualTree(A4);
             }
+            countTB = 0;
+            RecursivelyProcessVisualTree(A4);
             titlePage.mainToolsList.Clear();
             StringBuilder sb = new StringBuilder(titlePage.mainToolsList.Text);
             foreach (var item in tools)
@@ -216,6 +214,11 @@ namespace watcher
                     _A4CreatingClass.CreatA4().RowDefinitions.Add(new RowDefinition() { Height = new GridLength(a4height) });
                     _A4CreatingClass.CreatA4().Height += globalHeight;
                     _A4CreatingClass.CreatA4().ShowGridLines = true;
+
+                    Grid AddDeleteA4Grid = _addA4DeleteA4Class.AddA4DeleteA4();
+
+
+                    _A4CreatingClass.CreatA4().Children.Add();
 					break;
 			}
         }
@@ -285,7 +288,7 @@ namespace watcher
             PrintDialog printDialog = new PrintDialog();
             if (printDialog.ShowDialog() == true)
             {
-                printDialog.PrintVisual(tabForPrint.Content as Visual, "Печать содержимого TabItem");
+                  printDialog.PrintVisual(tabForPrint.Content as Visual, "Печать содержимого TabItem");
             }
         }
 
