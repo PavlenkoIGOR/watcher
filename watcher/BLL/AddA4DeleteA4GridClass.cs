@@ -18,7 +18,7 @@ namespace watcher.BLL
         public SheetAndSheetsGridCreateClass _SheetAndSheetsGridCreateClass = new SheetAndSheetsGridCreateClass();
         public StackCreatingClass _StackCreatingClass = new StackCreatingClass();
 		
-		public AddA4DeleteA4Class()
+		public AddA4DeleteA4GridClass()
 		{
 			
 		}
@@ -97,32 +97,32 @@ namespace watcher.BLL
                 return;
             }
         }
-	            /// <summary>
+        /// <summary>
         /// Удаляет последний лист А4
         /// </summary>
         public void DeleteSheet(object sender, RoutedEventArgs e, Grid currGrid)
         {
             if (sender is Button)
             {
-            	int rowIndex = currGrid.RowDefinitions.Count;            	
-            	currGrid.Children.RemoveAt(rowIndex-1);
-            	currGrid.RowDefinitions.RemoveAt(rowIndex-1);//удаление по индексу
-            	for (int i = 0; i < currGrid.RowDefinitions.Count; i++)
-            	{
-            		//UIElement element = currGrid.Children[i];            		
-            		currGrid.RowDefinitions[i].Height=new GridLength(793.7);           		
-            	}            	
-            	currGrid.Height = currGrid.RowDefinitions.Count * 793.7; 
-           		
-            	GC.Collect();
-            	GC.WaitForPendingFinalizers();
+                int rowIndex = currGrid.RowDefinitions.Count;
+                currGrid.Children.RemoveAt(rowIndex - 1);
+                currGrid.RowDefinitions.RemoveAt(rowIndex - 1);//удаление по индексу
+                for (int i = 0; i < currGrid.RowDefinitions.Count; i++)
+                {
+                    //UIElement element = currGrid.Children[i];            		
+                    currGrid.RowDefinitions[i].Height = new GridLength(793.7);
+                }
+                currGrid.Height = currGrid.RowDefinitions.Count * 793.7;
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
             }
             else
             {
                 return;
             }
-            
-            
+
+        }
             //из try ChatGpt
 //            private void RemoveGridRow(Grid grid, int rowIndex)
 //{

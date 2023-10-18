@@ -198,25 +198,6 @@ namespace watcher
             sb.Clear();
         }
 
-        /// <summary>
-        /// Метод для добавления нового листа А4
-        /// </summary>
-        private void Click_func(object sender, MouseButtonEventArgs e)
-        {
-			switch ((sender as Grid).Name)
-			{
-//				case ("A4"):
-//					A4.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(a4height) });
-//					A4.Height += globalHeight;
-//					A4.ShowGridLines = true;
-//					break;
-				case("A4"):
-                    _A4CreatingClass.CreatA4().RowDefinitions.Add(new RowDefinition() { Height = new GridLength(a4height) });
-                    _A4CreatingClass.CreatA4().Height += globalHeight;
-                    _A4CreatingClass.CreatA4().ShowGridLines = true;
-					break;
-			}
-        }
 
         /// <summary>
         /// Метод для добавления миниатюр А4 с дочерними элементами
