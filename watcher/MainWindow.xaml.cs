@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Printing;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
@@ -246,7 +247,13 @@ namespace watcher
             PrintDialog printDialog = new PrintDialog();
             if (printDialog.ShowDialog() == true)
             {
-                  printDialog.PrintVisual(tabForPrint.Content as Visual, "Печать содержимого TabItem");
+                // Устанавливаем ориентацию печати
+                PrintTicket ticket = printDialog.PrintTicket;
+                PageOrientation landscape = (tabForPrint.ActualWidth > tabForPrint.ActualHeight) ? PageOrientation.Landscape : PageOrientation.Portrait;
+                ticket.PageOrientation = landscape;
+                // Разрешаем пользователю выбирать ориентацию печати в окне печати
+                printDialog.UserPageRangeEnabled = true;
+                printDialog.PrintVisual(tabForPrint.Content as Visual, "Печать содержимого TabItem");
             }
         }
 
