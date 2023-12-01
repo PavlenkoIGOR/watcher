@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
 using watcher.BLL;
+using WRD = Microsoft.Office.Interop.Word;
 
 namespace watcher
 {
@@ -51,6 +52,7 @@ namespace watcher
             //forTitlePage.Source = new Uri("TitlePage.xaml", UriKind.Relative); //эта строка подключает свой Page. В данный момент не нужна т.к. подключается сейчас через InputPage().
             InputPage();
             InsertA4IntoScrollViewer();
+            SaveAsWRD.Click += (s, e) => SaveGridToWord(_fotTechProcTab.CreateMainTable());
         }
 		/// <summary>
 	/// метод для подключения своего Frame
@@ -248,7 +250,56 @@ namespace watcher
             }
         }
 
-        
+        private void SaveGridToWord(Grid grid)
+        {
+            // Создание нового экземпляра приложения Word
+            WRD.Application wordApp = new WRD.Application();
+            // Создание нового документа
+            WRD.Document document = wordApp.Documents.Add();
+
+            // Получение активного раздела документа
+            WRD.Section section = document.ActiveWindow.Selection.Sections.Add();
+
+            // Создаем таблицу с теми же размерами, что и Grid
+            WRD.Table wordTable = document.Tables.Add(document.Range(), grid.RowDefinitions.Count, grid.ColumnDefinitions.Count);
+
+            // Проходим через каждую ячейку Grid
+            for (int i = 0; i < grid.RowDefinitions.Count; i++)
+            {
+                for (int j = 0; j < grid.ColumnDefinitions.Count; j++)
+                {
+                    // Получаем TextBox в ячейке Grid
+                    TextBox textBox = grid.Children[j] as TextBox;
+
+                    // Вставляем текст из TextBox в ячейку таблицы Word
+                    wordTable.Cell(i, j).Range.Text = textBox.Text;
+                }
+            }
+
+            // Обход элементов внутри Grid
+            foreach (var element in grid.Children)
+            {
+                if (element is TextBox)
+                {
+                    // Получение текста из TextBox
+                    string text = (element as TextBox).Text;
+
+                    // Добавление текста в документ
+                    var paragraph = section.Range.Paragraphs.Add();
+                    paragraph.Range.Text = text;
+                }
+            }
+
+            //        	// Сохранение документа
+            //        	string filePath = "путь_к_файлу.docx";
+            //document.SaveAs(filePath);
+            // Сохраняем документ Word в нужном формате
+            document.SaveAs2(@"D:\VS\qwerty.docx", (object)WRD.WdSaveFormat.wdFormatDocumentDefault);
+
+            // Закрытие документа и приложения Word
+            document.Close();
+            wordApp.Quit();
+        }
     }
 
 }

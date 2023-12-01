@@ -22,7 +22,7 @@
 					Header="Открыть"></MenuItem>
 				<MenuItem
 					Header="Сохранить"></MenuItem>
-				<MenuItem
+                <MenuItem x:Name="SaveAsWRD"
 					Header="Сохранить как..."></MenuItem>
 				<MenuItem
 					Header="Печать" Click="GoPrinting"></MenuItem>
