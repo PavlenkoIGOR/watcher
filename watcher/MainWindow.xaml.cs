@@ -96,8 +96,7 @@ namespace watcher
         /// Метод вставки А4 во вкладку
         /// </summary>
         private void InsertA4IntoScrollViewer()
-        {
-           
+        {         
             //создание листа А4
             A4 = _A4CreatingClass.CreatA4();
 
@@ -132,7 +131,7 @@ namespace watcher
             A4.Children.Add(addA4DeleteA4);
 
             ScrollViewerForTabs.Content = A4; //вставка А4
-                 //вставка в А4 таблицы-разметка 2х2
+                 //вставка в А4 таблицы-разметки 2х2
         }
 
         private void Renew(object sender, RoutedEventArgs e)
