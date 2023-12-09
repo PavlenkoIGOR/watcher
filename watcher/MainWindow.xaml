@@ -21,7 +21,7 @@
 				<MenuItem
 					Header="Открыть"></MenuItem>
 				<MenuItem
-					Header="Сохранить"></MenuItem>
+					Header="Сохранить" x:Name="SaveMy"></MenuItem>
                 <MenuItem x:Name="SaveAsWRD"
 					Header="Сохранить как..."></MenuItem>
 				<MenuItem

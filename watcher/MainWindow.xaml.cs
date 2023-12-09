@@ -1,21 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Packaging;
 using System.Linq;
 using System.Printing;
-using System.Reflection;
-using System.Reflection.Emit;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Xml;
+using System.Windows.Xps;
+using System.Windows.Xps.Packaging;
 using watcher.BLL;
 using WRD = Microsoft.Office.Interop.Word;
 
@@ -24,11 +20,11 @@ namespace watcher
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : System.Windows.Window
     {
-    		//для работы с текстбоксами "NumOfRow"		
-		List <TextBox> NumsOfRowsList = new List<TextBox>();
-		int countTB=1;
+        //для работы с текстбоксами "NumOfRow"		
+        List<TextBox> NumsOfRowsList = new List<TextBox>();
+        int countTB = 1;
         Grid A4;
         SheetAndSheetsGridCreateClass _sheetsAndSheet = new SheetAndSheetsGridCreateClass();
         StackCreatingClass _stackCreatingClass = new StackCreatingClass();
@@ -42,28 +38,25 @@ namespace watcher
         private double a4height = 793.7d;
         public MainWindow()
         {
-            //_A4CreatingClass = new A4CreatingClass();
-            //_sheetsAndSheet = new SheetAndSheetsGridCreateClass();
-            //_stackCreatingClass = new StackCreatingClass();
-            //_fotTechProcTab = new TechProcGridCreatingClass(_stackCreatingClass);
             titlePage = new TitlePage();
-            //_creating2x2GridClass = new Creating2x2GridClass();
 
             InitializeComponent();
             //forTitlePage.Source = new Uri("TitlePage.xaml", UriKind.Relative); //эта строка подключает свой Page. В данный момент не нужна т.к. подключается сейчас через InputPage().
             InputPage();
             InsertA4IntoScrollViewer();
             SaveAsWRD.Click += (s, e) => SaveGridToWord(_fotTechProcTab.CreateMainTable());
+            SaveMy.Click += (s, e) => RecursivelyProcessVisualTree(_fotTechProcTab.CreateMainTable());
+
         }
-		/// <summary>
-	/// метод для подключения своего Frame
-	/// </summary>
-	private void InputPage()
+        /// <summary>
+        /// метод для подключения своего Frame
+        /// </summary>
+        private void InputPage()
         {
             //MainWindow mainWindow = new MainWindow();
-            Frame mainFrame = this.FindName("forTitlePage") as Frame; // Найдите элемент Frame в главном окне
-            mainFrame.Navigate(titlePage); // Загружаете вашу страницу во Frame
-            this.Show(); // Отображаете главное окно
+            Frame mainFrame = this.FindName("forTitlePage") as Frame; // Найти элемент Frame в главном окне
+            mainFrame.Navigate(titlePage); // Загрузка своей страницы во Frame
+            this.Show(); // Отображение главного окна
         }
 
 
@@ -72,45 +65,52 @@ namespace watcher
         /// Метод, устанавливающий номера строк с ТП
         /// </summary>
 		private void RecursivelyProcessVisualTree(DependencyObject element)
-		{
-			// Проверка, является ли элемент контейнером
-			if (element is Visual)
-			{
-				// Рекурсивный обход дочерних элементов
-				for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
-				{					
-					if((element is TextBox) && (element as TextBox).Name == "NumOfRow")
-					{						
-						countTB++;	
-						(element as TextBox).Text = countTB.ToString();
-					}
-					else
-					{
-						DependencyObject child = VisualTreeHelper.GetChild(element, i);
-						RecursivelyProcessVisualTree(child);
-					}					
-				}
-			}
-		}
+        {
+            List<int> ints = new List<int>(capacity: 45);
 
+            // Проверка, является ли элемент контейнером
+            if (element is Visual)
+            {
+                // Рекурсивный обход дочерних элементов
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
+                {
+                    if ((element is TextBox) && (element as TextBox).Name == "NumOfRow")
+                    {
+                        System.Diagnostics.Debug.WriteLine("countTB " + (element as TextBox).Text);
+                        countTB++;
+                        (element as TextBox).Text = countTB.ToString();
+                    }
+                    else
+                    {
+                        DependencyObject child = VisualTreeHelper.GetChild(element, i);
+                        RecursivelyProcessVisualTree(child);
+                    }
+                }
+            }
+        }
+
+        #region сегодня это не нужно
         /// <summary>
         /// Метод вставки А4 во вкладку
         /// </summary>
         private void InsertA4IntoScrollViewer()
         {
-           
+
             //создание листа А4
             A4 = _A4CreatingClass.CreatA4();
+            A4.Name = "A4";
 
             //создание таблицы с тех.процессом
             Grid headGrid = _fotTechProcTab.CreateMainTable();
-            //_fotTechProcTab.CreateTextBox1_2_3_4_7_8(s,r,headGrid);
 
+
+            //_fotTechProcTab.CreateTextBox1_2_3_4_7_8(s,r,headGrid);
             //создание таблицы с количеством листов
             Grid sheetAndSheets = _sheetsAndSheet.CreateSheetAndSheetsGrid();
 
             //создание основной сетки 2х2
             Grid grid2x2 = _creating2x2GridClass.Creating2x2Grid();
+            grid2x2.Name = "grid2x2";
             Grid.SetRow(grid2x2, A4.RowDefinitions.Count - 1);
             Grid.SetColumn(grid2x2, 0);
             grid2x2.Children.Add(headGrid);
@@ -126,14 +126,14 @@ namespace watcher
             Grid.SetRow(stackTP, headGrid.RowDefinitions.Count - 1);
             Grid.SetColumn(stackTP, 4);
             Grid.SetColumnSpan(stackTP, 2);
-                        
+
             headGrid.Children.Add(stackTP);
-           
+
             A4.Children.Add(grid2x2);
             A4.Children.Add(addA4DeleteA4);
 
             ScrollViewerForTabs.Content = A4; //вставка А4
-                 //вставка в А4 таблицы-разметка 2х2
+                                              //вставка в А4 таблицы-разметка 2х2
         }
 
         private void Renew(object sender, RoutedEventArgs e)
@@ -212,41 +212,69 @@ namespace watcher
             violetGrid.ShowGridLines = true;
         }
 
-		/// <summary>
-		/// Метод проверки в TextBox'е ли каретка
-		/// </summary>
-		private void GetCursor(object sender, EventArgs e)
-		{
-			//Проверка в textbox'е ли каретка
-			if ((sender as TextBox).IsKeyboardFocused)
-			{
-				string  thisBoxName = (sender as TextBox).Name;
-				
-				titlePage.ActualDocsGrid.Text += thisBoxName;
-			}
-		}
+        /// <summary>
+        /// Метод проверки в TextBox'е ли каретка
+        /// </summary>
+        private void GetCursor(object sender, EventArgs e)
+        {
+            //Проверка в textbox'е ли каретка
+            if ((sender as TextBox).IsKeyboardFocused)
+            {
+                string thisBoxName = (sender as TextBox).Name;
+
+                titlePage.ActualDocsGrid.Text += thisBoxName;
+            }
+        }
 
 
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-        	// Выполните ваше действие при получении фокуса клавиатуры, например, задайте команду для вызова
-        	var focusedElement = Keyboard.FocusedElement as FrameworkElement;
-        	if (focusedElement != null)
-        	{
-        		string elementName = focusedElement.Name;
-        		// Вы можете использовать elementName в вашем коде
-        	}
+            // Выполнить нужное действие при получении фокуса клавиатуры, например, задать команду для вызова
+            var focusedElement = Keyboard.FocusedElement as FrameworkElement;
+            if (focusedElement != null)
+            {
+                string elementName = focusedElement.Name;
+                // можно использовать elementName в коде
+            }
         }
-                
+        #endregion
+
         ///<summary>
         /// метод отправки на печать
         /// </summary>
         private void GoPrinting(object sender, RoutedEventArgs e)
         {
+            DocumentViewer docViewer = new DocumentViewer();
+            //выбор элемента для печати
             TabItem tabForPrint = execProcTab;
+            //создание окна печати
             PrintDialog printDialog = new PrintDialog();
+
+            printDialog.PageRangeSelection = PageRangeSelection.AllPages;
+            printDialog.UserPageRangeEnabled = true;
+
+            FlowDocument doc = (FlowDocument)docViewer.Document;
+
             if (printDialog.ShowDialog() == true)
             {
+                // Сохранить все имеющиеся настройки
+                double pageHeight = doc.PageHeight;
+                double pageWidth = doc.PageWidth;
+                Thickness pagePadding = doc.PagePadding;
+                double columnGap = doc.ColumnGap;
+                double columnWidth = doc.ColumnWidth;
+
+                // Привести страницу FlowDocument в соответствие с печатной страницей
+                doc.PageHeight = printDialog.PrintableAreaHeight;
+                doc.PageWidth = printDialog.PrintableAreaWidth;
+                doc.PagePadding = new Thickness(0);
+
+                printDialog.PrintDocument(
+                    ((IDocumentPaginatorSource)doc).DocumentPaginator, "A Flow Document");
+
+
+
+
                 // Устанавливаем ориентацию печати
                 PrintTicket ticket = printDialog.PrintTicket;
                 PageOrientation landscape = (tabForPrint.ActualWidth > tabForPrint.ActualHeight) ? PageOrientation.Landscape : PageOrientation.Portrait;
@@ -254,6 +282,10 @@ namespace watcher
                 // Разрешаем пользователю выбирать ориентацию печати в окне печати
                 printDialog.UserPageRangeEnabled = true;
                 printDialog.PrintVisual(tabForPrint.Content as Visual, "Печать содержимого TabItem");
+            }
+            else
+            {
+                return;
             }
         }
 
