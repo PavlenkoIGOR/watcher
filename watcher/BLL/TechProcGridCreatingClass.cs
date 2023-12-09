@@ -141,6 +141,7 @@ namespace watcher.BLL
 
             //таблица с Т.П.
             Grid headGrid = new Grid() { HorizontalAlignment = HorizontalAlignment.Stretch, ShowGridLines = false };
+            headGrid.Name = "headGrid";
             headGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18.9) });
             headGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18.9) });
             headGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
