@@ -48,7 +48,8 @@
 			<Button
 				Content="Button"
 				Width="75"
-				Height="23" />
+				Height="23" 
+                Click="CreateTXTse"/>
 		</Menu>
 		<StatusBar
 			DockPanel.Dock="Bottom"
@@ -101,7 +102,11 @@
 						VerticalAlignment="Top">
                     </ScrollViewer>
 				</TabItem>
-			</TabControl>
+                <TabItem
+                    x:Name="Schemas"
+                    Header="Схемы">
+                </TabItem>
+            </TabControl>
 		</SelectiveScrollingGrid>
 	</DockPanel>
 </Window>
