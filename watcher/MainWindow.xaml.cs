@@ -4,14 +4,17 @@ using System.IO;
 using System.IO.Packaging;
 using System.Linq;
 using System.Printing;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
+using System.Xml.Linq;
 using watcher.BLL;
 using WRD = Microsoft.Office.Interop.Word;
 
@@ -45,8 +48,7 @@ namespace watcher
             InputPage();
             InsertA4IntoScrollViewer();
             SaveAsWRD.Click += (s, e) => SaveGridToWord(_fotTechProcTab.CreateMainTable());
-            SaveMy.Click += (s, e) => RecursivelyProcessVisualTree(_fotTechProcTab.CreateMainTable());
-
+            SaveMy.Click += (s, e) => RecursivelyProcessVisualTree();
         }
         /// <summary>
         /// метод для подключения своего Frame
@@ -64,29 +66,40 @@ namespace watcher
         /// <summary>
         /// Метод, устанавливающий номера строк с ТП
         /// </summary>
-		private void RecursivelyProcessVisualTree(DependencyObject element)
+         List < UIElement > elements = new List< UIElement >();
+        public  void RecursivelyProcessVisualTree()
         {
-            // Проверка, является ли элемент контейнером
-            if (element is Visual)
-            {                
-                // Рекурсивный обход дочерних элементов
-                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
+            TabControl? tabControl = this.FindName("myTabControl") as TabControl;
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(tabControl); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(tabControl, i);
+                if (child is Visual)
                 {
-                    if ((element is TextBox) && (element as TextBox).Name == "NumOfRow")
-                    {
-                        System.Diagnostics.Debug.WriteLine("countTB " + (element as TextBox).Text);
-                        countTB++;
-                        (element as TextBox).Text = countTB.ToString();
-                    }
-                    else
-                    {
-                        DependencyObject child = VisualTreeHelper.GetChild(element, i);
-                        RecursivelyProcessVisualTree(child);
-                    }
+                    // Производим дальнейшие действия с дочерним элементом
+                    Visual visualChild = child as Visual;
                 }
             }
         }
 
+        private static void Traverse(UIElement element)
+        {
+            if (element is Panel panel)
+            {
+                foreach (UIElement child in panel.Children)
+                {
+                    Traverse(child);
+                }
+            }
+        }
+
+        private void CreateTXTse(Object sender, EventArgs e)
+        {
+
+            foreach (var element in elements)
+            {
+                CreateTXT(element);
+            }
+        }
         #region сегодня это не нужно
         /// <summary>
         /// Метод вставки А4 во вкладку
@@ -131,6 +144,7 @@ namespace watcher
 
             ScrollViewerForTabs.Content = A4; //вставка А4
                                               //вставка в А4 таблицы-разметка 2х2
+
         }
 
         private void Renew(object sender, RoutedEventArgs e)
@@ -179,7 +193,6 @@ namespace watcher
                 }
             }
             countTB = 0;
-            RecursivelyProcessVisualTree(A4);
             titlePage.mainToolsList.Clear();
             StringBuilder sb = new StringBuilder(titlePage.mainToolsList.Text);
             foreach (var item in tools)
@@ -323,6 +336,21 @@ namespace watcher
             // Закрытие документа и приложения Word
             document.Close();
             wordApp.Quit();
+        }
+
+        private void CreateTXT(DependencyObject dependencyObject)
+        {
+            string[] path = { @"d:\", "Text1hw1_13.txt" };
+            string filePath = Path.Combine(path);
+
+            using (FileStream fs = new FileStream(filePath, FileMode.Append, FileAccess.Write, FileShare.None))
+            {
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    sw.WriteLine($"{dependencyObject.GetType()}");
+                }
+            }
+
         }
     }
 

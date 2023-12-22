@@ -9,10 +9,11 @@ using System.Windows;
 using System.Windows.Input;
 using System.Xml.Serialization;
 using watcher.BLL;
+using System.Windows.Markup;
 
 namespace watcher.BLL
 {
-    public class TechProcGridCreatingClass
+    public class TechProcGridCreatingClass : Grid
     {
         //internal Grid mainGrid;
         private double globalHeight = 793.7d;
@@ -142,6 +143,8 @@ namespace watcher.BLL
             //таблица с Т.П.
             Grid headGrid = new Grid() { HorizontalAlignment = HorizontalAlignment.Stretch, ShowGridLines = false };
             headGrid.Name = "headGrid";
+
+
             headGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18.9) });
             headGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18.9) });
             headGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
