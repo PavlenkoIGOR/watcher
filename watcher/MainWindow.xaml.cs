@@ -66,11 +66,9 @@ namespace watcher
         /// </summary>
 		private void RecursivelyProcessVisualTree(DependencyObject element)
         {
-            List<int> ints = new List<int>(capacity: 45);
-
             // Проверка, является ли элемент контейнером
             if (element is Visual)
-            {
+            {                
                 // Рекурсивный обход дочерних элементов
                 for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
                 {
@@ -98,7 +96,6 @@ namespace watcher
 
             //создание листа А4
             A4 = _A4CreatingClass.CreatA4();
-            A4.Name = "A4";
 
             //создание таблицы с тех.процессом
             Grid headGrid = _fotTechProcTab.CreateMainTable();
@@ -244,6 +241,11 @@ namespace watcher
         /// </summary>
         private void GoPrinting(object sender, RoutedEventArgs e)
         {
+            PageContent pageContent = new PageContent();
+            FixedPage fixedPage = new FixedPage();
+            
+
+
             DocumentViewer docViewer = new DocumentViewer();
             //выбор элемента для печати
             TabItem tabForPrint = execProcTab;
@@ -257,23 +259,6 @@ namespace watcher
 
             if (printDialog.ShowDialog() == true)
             {
-                // Сохранить все имеющиеся настройки
-                double pageHeight = doc.PageHeight;
-                double pageWidth = doc.PageWidth;
-                Thickness pagePadding = doc.PagePadding;
-                double columnGap = doc.ColumnGap;
-                double columnWidth = doc.ColumnWidth;
-
-                // Привести страницу FlowDocument в соответствие с печатной страницей
-                doc.PageHeight = printDialog.PrintableAreaHeight;
-                doc.PageWidth = printDialog.PrintableAreaWidth;
-                doc.PagePadding = new Thickness(0);
-
-                printDialog.PrintDocument(
-                    ((IDocumentPaginatorSource)doc).DocumentPaginator, "A Flow Document");
-
-
-
 
                 // Устанавливаем ориентацию печати
                 PrintTicket ticket = printDialog.PrintTicket;

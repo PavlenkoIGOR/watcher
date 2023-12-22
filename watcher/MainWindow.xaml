@@ -101,7 +101,11 @@
 						VerticalAlignment="Top">
                     </ScrollViewer>
 				</TabItem>
-			</TabControl>
+                <TabItem
+                    x:Name="schemasTab"
+                    Header="Схемы">
+                </TabItem>
+            </TabControl>
 		</SelectiveScrollingGrid>
 	</DockPanel>
 </Window>

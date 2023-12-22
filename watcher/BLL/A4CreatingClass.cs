@@ -18,6 +18,7 @@ namespace watcher.BLL
         internal Grid CreatA4()
         {
             Grid A4 = new Grid() { VerticalAlignment = VerticalAlignment.Top, HorizontalAlignment = HorizontalAlignment.Center, Height = 793.7, Width = 1122.5, Background = Brushes.Bisque, Name = "A4" };
+            A4.Name = "A4";
             A4.VerticalAlignment = VerticalAlignment.Top;
             A4.HorizontalAlignment = HorizontalAlignment.Center;
             A4.Height = 793.7; 
