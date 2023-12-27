@@ -78,6 +78,7 @@ namespace watcher
 
             MyTraverse.TraverseElements(tabControl, elementsMain);
             MyCreateFile.MyCreateFileMethod(elementsMain);
+
         }
 
         #region сегодня это не нужно
