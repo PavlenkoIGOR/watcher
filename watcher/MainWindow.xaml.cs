@@ -68,7 +68,7 @@ namespace watcher
         /// Метод, устанавливающий номера строк с ТП - где он?
         /// </summary>
          List < UIElement > elementsMain = new List< UIElement >();
-        public  void RecursivelyProcessVisualTree()
+        public void RecursivelyProcessVisualTree()
         {
             TabControl? tabControl = this.FindName("myTabControl") as TabControl;
             if (tabControl != null)
