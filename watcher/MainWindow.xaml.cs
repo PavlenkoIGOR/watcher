@@ -16,6 +16,7 @@ using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
 using System.Xml.Linq;
 using watcher.BLL;
+using watcher.BLL.Services;
 using WRD = Microsoft.Office.Interop.Word;
 
 namespace watcher
@@ -64,42 +65,21 @@ namespace watcher
 
         //перебор элементов !!!!!!!!!!!!!!!!!!!!Этот метод можно использовать для сериализации всех данных отрисовки в иерархии визуального объекта.
         /// <summary>
-        /// Метод, устанавливающий номера строк с ТП
+        /// Метод, устанавливающий номера строк с ТП - где он?
         /// </summary>
-         List < UIElement > elements = new List< UIElement >();
+         List < UIElement > elementsMain = new List< UIElement >();
         public  void RecursivelyProcessVisualTree()
         {
             TabControl? tabControl = this.FindName("myTabControl") as TabControl;
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(tabControl); i++)
+            if (tabControl != null)
             {
-                DependencyObject child = VisualTreeHelper.GetChild(tabControl, i);
-                if (child is Visual)
-                {
-                    // Производим дальнейшие действия с дочерним элементом
-                    Visual visualChild = child as Visual;
-                }
+                MyTraverse.TraverseElements(tabControl, elementsMain);
             }
+
+            MyTraverse.TraverseElements(tabControl, elementsMain);
+            MyCreateFile.MyCreateFileMethod(elementsMain);
         }
 
-        private static void Traverse(UIElement element)
-        {
-            if (element is Panel panel)
-            {
-                foreach (UIElement child in panel.Children)
-                {
-                    Traverse(child);
-                }
-            }
-        }
-
-        private void CreateTXTse(Object sender, EventArgs e)
-        {
-
-            foreach (var element in elements)
-            {
-                CreateTXT(element);
-            }
-        }
         #region сегодня это не нужно
         /// <summary>
         /// Метод вставки А4 во вкладку
@@ -162,7 +142,7 @@ namespace watcher
                 {
                     if (elemenTabMain is Grid) //здесь таблица mainGrid (в ней уже надо искать таблицу tableWithTechProc)
                     {
-                        foreach (var elementTP in (elemenTabMain as Grid).Children)
+                        foreach (UIElement elementTP in (elemenTabMain as Grid).Children)
                         {
                             if (elementTP is Grid)
                             {
@@ -172,7 +152,7 @@ namespace watcher
                                     {
                                         Count++;
                                         foreach (UIElement grid in ((StackPanel)element).Children) //переборка всех гридов в StackPanel
-                                        {
+                                        {                                            
                                             if (grid is Grid)
                                             {
                                                 for (int rowIndex = 0; rowIndex <= ((Grid)grid).RowDefinitions.Count; rowIndex++)
@@ -351,20 +331,7 @@ namespace watcher
             wordApp.Quit();
         }
 
-        private void CreateTXT(DependencyObject dependencyObject)
-        {
-            string[] path = { @"d:\", "Text1hw1_13.txt" };
-            string filePath = Path.Combine(path);
 
-            using (FileStream fs = new FileStream(filePath, FileMode.Append, FileAccess.Write, FileShare.None))
-            {
-                using (StreamWriter sw = new StreamWriter(fs))
-                {
-                    sw.WriteLine($"{dependencyObject.GetType()}");
-                }
-            }
-
-        }
     }
 
 }

@@ -49,7 +49,7 @@
 				Content="Button"
 				Width="75"
 				Height="23" 
-                Click="CreateTXTse"/>
+                />
 		</Menu>
 		<StatusBar
 			DockPanel.Dock="Bottom"
