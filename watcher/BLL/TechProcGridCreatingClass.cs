@@ -79,9 +79,9 @@ namespace watcher.BLL
         {
             //Создание "Основные и вспомогательные производственные операции и их последовательность"
             TextBox tb_OpAndFoll = new TextBox() { FontSize = 10, Background = new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)), BorderThickness = new Thickness(1, 2, 2, 1), BorderBrush = Brushes.Black, Text = "Основные и вспомогательные производственные операции и их последовательность", Margin = new Thickness(0, 0, 0, 0), VerticalAlignment = VerticalAlignment.Stretch, HorizontalAlignment = HorizontalAlignment.Stretch, HorizontalContentAlignment = HorizontalAlignment.Center };
-            Grid.SetRow(tb_OpAndFoll, 0);
-            Grid.SetColumn(tb_OpAndFoll, 0);
-            Grid.SetColumnSpan(tb_OpAndFoll, 8);
+            SetRow(tb_OpAndFoll, 0);
+            SetColumn(tb_OpAndFoll, 0);
+            SetColumnSpan(tb_OpAndFoll, 8);
 
             //Создание №п/п
             TextBox tb_PP = new TextBox() { FontSize = 10, Background = new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)), BorderThickness = new Thickness(1, 1, 1, 1), BorderBrush = Brushes.Black, TextWrapping = TextWrapping.Wrap, Text = "№   п/п", Margin = new Thickness(0, 0, 0, 0), VerticalAlignment = VerticalAlignment.Stretch, HorizontalAlignment = HorizontalAlignment.Stretch, HorizontalContentAlignment = HorizontalAlignment.Center, VerticalContentAlignment = VerticalAlignment.Center };
@@ -142,7 +142,7 @@ namespace watcher.BLL
 
             //таблица с Т.П.
             Grid headGrid = new Grid() { HorizontalAlignment = HorizontalAlignment.Stretch, ShowGridLines = false };
-            headGrid.Name = "headGrid";
+
 
 
             headGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(18.9) });

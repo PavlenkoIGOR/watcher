@@ -85,8 +85,8 @@ namespace watcher.BLL
                 Grid.SetRow(another2x2Grid, currGrid.RowDefinitions.Count-1);
                 another2x2Grid.Children.Add(anotherGridWithTechProc);
                 another2x2Grid.Children.Add(anotherSheetAndSheetsGrid);
-                
-                
+                currGrid.RegisterName("headGrid", another2x2Grid);
+
                 currGrid.Children.Add(another2x2Grid);
                 currGrid.Children.Add(anotherAddA4DeleteA4Grid);
 
