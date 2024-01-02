@@ -141,7 +141,7 @@ namespace watcher.BLL
             Grid.SetColumnSpan(tb6_2, 8);
 
             //таблица с Т.П.
-            Grid headGrid = new Grid() { HorizontalAlignment = HorizontalAlignment.Stretch, ShowGridLines = false };
+            Grid headGrid = new Grid() { HorizontalAlignment = HorizontalAlignment.Stretch, ShowGridLines = false, Name = "headGrid" };
 
 
 

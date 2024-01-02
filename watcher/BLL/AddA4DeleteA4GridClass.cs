@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Media.Media3D;
-using System.Windows.Media;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace watcher.BLL
 {
-    
+
     internal class AddA4DeleteA4GridClass
     {
         public TechProcGridCreatingClass _techProcGridCreatingClass = new TechProcGridCreatingClass(); 
@@ -37,6 +32,7 @@ namespace watcher.BLL
 
             //создание Grid для кнопок добавления/удаления листов
             Grid gridForButton = new Grid() { VerticalAlignment = VerticalAlignment.Bottom, HorizontalAlignment = HorizontalAlignment.Center };
+            gridForButton.Name = "AddA4DeleteA4";
             gridForButton.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
             gridForButton.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
             gridForButton.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
@@ -74,7 +70,8 @@ namespace watcher.BLL
                 Grid anotherGridWithTechProc = _techProcGridCreatingClass.CreateMainTable();
                 Grid.SetRow(anotherGridWithTechProc, 0);
                 Grid.SetColumn(anotherGridWithTechProc, 1);
-                                
+                
+
                 StackPanel anotherStackPanel = _StackCreatingClass.CreateStackPanelIntoTeckProcesstable();
                 Grid.SetRow(anotherStackPanel, anotherGridWithTechProc.RowDefinitions.Count-1);
                 Grid.SetColumn(anotherStackPanel, 4);
@@ -85,11 +82,12 @@ namespace watcher.BLL
                 Grid.SetRow(another2x2Grid, currGrid.RowDefinitions.Count-1);
                 another2x2Grid.Children.Add(anotherGridWithTechProc);
                 another2x2Grid.Children.Add(anotherSheetAndSheetsGrid);
-                currGrid.RegisterName("headGrid", another2x2Grid);
+                //currGrid.RegisterName("headGrid", another2x2Grid);
+                
 
                 currGrid.Children.Add(another2x2Grid);
                 currGrid.Children.Add(anotherAddA4DeleteA4Grid);
-
+                anotherGridWithTechProc.Name = "headGrid";
                 //return;
             }
             else

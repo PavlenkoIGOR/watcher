@@ -121,7 +121,7 @@ public partial class MainWindow : System.Windows.Window
 
         ScrollViewerForTabs.Content = A4; //вставка А4
                                           //вставка в А4 таблицы-разметка 2х2
-        A4.RegisterName("headGrid", headGrid);
+        //A4.RegisterName("headGrid", headGrid);
         A4.RegisterName("grid2x2", grid2x2);
     }
 
@@ -334,66 +334,92 @@ public partial class MainWindow : System.Windows.Window
     /// <returns></returns>
     TP_TabSerialize Serializer()
     {
-        TP_TabSerialize tP_TabSerialize = new TP_TabSerialize();
-        TextBox_Serialize textBoxInTProc_Serialize = new TextBox_Serialize();
-        TechProc_Serialize techProc_Serialize   = new TechProc_Serialize();
+        
+        TextBox_Serialize textBoxInTProc_Serialize = new TextBox_Serialize();        
         StackPanel_Serialize stackPanel_Serialize = new StackPanel_Serialize();
         SheetSheetsGrid_Serialize sheetSheetsGrid_Serialize = new SheetSheetsGrid_Serialize();
         GridInStackPanel_Serialize gridInStackPanel_Serialize = new GridInStackPanel_Serialize();
+        TechProc_Serialize techProc_Serialize = new TechProc_Serialize();
         Grid2x2_Serialize grid2X2_Serialize = new Grid2x2_Serialize();
         A4Serialize a4Serialize = new A4Serialize();
+        TP_TabSerialize tP_TabSerialize = new TP_TabSerialize();
 
-        foreach (var child in ((Grid)myTabControl.FindName("headGrid")).Children)
+        List<Grid2x2_Serialize> grid2X2_Ser = new List<Grid2x2_Serialize>();
+        foreach (var item in A4.Children)
         {
-            if (child is TextBox)
+            if ((item as Grid).Name == "mainGrid")
             {
-                techProc_Serialize.TextBoxsList_Serialize.Add(new TextBox_Serialize() 
+                foreach (var TP_grid in (item as Grid).Children)
                 {
-                    TextBoxRow = Grid.GetRow((TextBox)child),
-                    TextBoxColumn = Grid.GetColumn((TextBox)child),
-                    TextBoxColumnSpan = Grid.GetColumnSpan((TextBox)child),
-                    TextBoxRowSpan = Grid.GetRowSpan((TextBox)child),
-                    TextBox_Text = ((TextBox)child).Text
-                });
-            }
-            if (child is StackPanel)
-            {
-                List<GridInStackPanel_Serialize> gridInStackPanel_Ser = new List<GridInStackPanel_Serialize>();
-                int count = 0;
-                foreach (var childSP in (child as StackPanel).Children)
-                {
-                    if (childSP is Grid)
+                    if ((TP_grid as Grid).Name == "headGrid")
                     {
-                        List<TextBox_Serialize> tbSer = new List<TextBox_Serialize>();
-                        foreach (var tb in (childSP as Grid).Children)
+
+                        foreach (var child in ((Grid)TP_grid).Children)
                         {
-                            tbSer.Add(new TextBox_Serialize() 
+                            if (child is TextBox)
                             {
-                                TextBoxColumn = Grid.GetColumn((TextBox)tb),
-                                TextBoxRow = Grid.GetRowSpan((TextBox)tb),
-                                TextBox_Text = ((TextBox)tb).Text
-                            });
+                                techProc_Serialize.TextBoxsList_Serialize.Add(new TextBox_Serialize()
+                                {
+                                    TextBoxRow = Grid.GetRow((TextBox)child),
+                                    TextBoxColumn = Grid.GetColumn((TextBox)child),
+                                    TextBoxColumnSpan = Grid.GetColumnSpan((TextBox)child),
+                                    TextBoxRowSpan = Grid.GetRowSpan((TextBox)child),
+                                    TextBox_Text = ((TextBox)child).Text
+                                });
+                            }
+                            if (child is StackPanel)
+                            {
+                                List<GridInStackPanel_Serialize> gridInStackPanel_Ser = new List<GridInStackPanel_Serialize>();
+                                int count = 0;
+                                foreach (var childSP in (child as StackPanel).Children)
+                                {
+                                    if (childSP is Grid)
+                                    {
+                                        List<TextBox_Serialize> tbSer = new List<TextBox_Serialize>();
+                                        foreach (var tb in (childSP as Grid).Children)
+                                        {
+                                            tbSer.Add(new TextBox_Serialize()
+                                            {
+                                                TextBoxColumn = Grid.GetColumn((TextBox)tb),
+                                                TextBoxRow = Grid.GetRowSpan((TextBox)tb),
+                                                TextBox_Text = ((TextBox)tb).Text
+                                            });
+                                        }
+                                        gridInStackPanel_Ser.Add(new GridInStackPanel_Serialize()
+                                        {
+                                            GridsInStackPanelRow = count++,
+                                            TextBoxsInStackPanel = tbSer
+                                        });
+                                    }
+                                }
+                                techProc_Serialize.StackPanelsList_Serialize.Add(new StackPanel_Serialize
+                                {
+                                    StackPanelRowInTechProcGrid = Grid.GetRow((StackPanel)child),
+                                    StackPanelColumnInTechProcGrid = Grid.GetColumn((StackPanel)child),
+                                    StackPanelSpanColumn = Grid.GetColumnSpan((StackPanel)child),
+                                    gridsInStackPanel = gridInStackPanel_Ser
+                                });
+                            }
                         }
-                        gridInStackPanel_Ser.Add(new GridInStackPanel_Serialize() 
-                        {
-                            GridsInStackPanelRow = count++,
-                            TextBoxsInStackPanel = tbSer
-                        });
                     }
                 }
-                techProc_Serialize.StackPanelsList_Serialize.Add(new StackPanel_Serialize
+                grid2X2_Ser.Add(new Grid2x2_Serialize()
                 {
-                    StackPanelRowInTechProcGrid = Grid.GetRow((StackPanel)child),
-                    StackPanelColumnInTechProcGrid = Grid.GetColumn((StackPanel)child),
-                    StackPanelSpanColumn = Grid.GetColumnSpan((StackPanel)child),
-                    gridsInStackPanel = gridInStackPanel_Ser
+                    Grid2x2InA4Row_Ser = Grid.GetRow((Grid)item),
+                    techProc_Serialize = techProc_Serialize
                 });
+                tP_TabSerialize.A4Serialize = a4Serialize;
+                tP_TabSerialize.A4Serialize.A4Rows = A4.RowDefinitions.Count;
+            }
+            if ((item as Grid).Name == "AddA4DeleteA4")
+            {
+                MessageBox.Show("Это AddA4DeleteA4GridClass");
             }
         }
-
+        tP_TabSerialize.A4Serialize.grid2X2_Serialize = grid2X2_Ser;
         
         // сохранение данных
-        using (FileStream fs = new FileStream(@"D:/Watcher.json", FileMode.OpenOrCreate))
+        using (FileStream fs = new FileStream(@"D:/Watcher.json", FileMode.Create, FileAccess.Write))
         {
             JsonSerializerOptions options = new JsonSerializerOptions()
             {
@@ -401,7 +427,7 @@ public partial class MainWindow : System.Windows.Window
                 Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
             };
             
-            JsonSerializer.Serialize<TechProc_Serialize>(fs, techProc_Serialize, options);
+            JsonSerializer.Serialize<TP_TabSerialize>(fs, tP_TabSerialize, options);
             fs.Close();
         }
         return new TP_TabSerialize();
