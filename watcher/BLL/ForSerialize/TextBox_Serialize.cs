@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace watcher.BLL.ForSerialize
+namespace watcher.BLL.ForSerialize;
+
+public class TextBox_Serialize
 {
-    public class TextBox_Serialize
-    {
-        public byte TextBoxRow { get; set; }
-        public byte TextBoxColumn { get; set; }
-        public byte TextBoxColumnSpan { get; set; }
-        public byte TextBoxRowSpan { get; set; }
-        public string TextBox_Text { get; set; }
-    }
+    public int TextBoxRow { get; set; }
+    public int TextBoxColumn { get; set; }
+    public int? TextBoxColumnSpan { get; set; }
+    public int? TextBoxRowSpan { get; set; }
+    public string TextBox_Text { get; set; }
 }
+
+
+

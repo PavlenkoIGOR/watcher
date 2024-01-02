@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace watcher.BLL.ForSerialize
+namespace watcher.BLL.ForSerialize;
+
+public class GridInStackPanel_Serialize
 {
-    public class GridInStackPanel_Serialize
-    {
-        public string? GridInStackPanelName { get; set; }
-        public sbyte ? GridInStackPanelRow { get; set; }
-        public sbyte ? GridInStackPanelColumn { get; set; }
-
-        public List<TextBox_Serialize> TextBoxsInStackPanel{ get; set; }
-    }
+    public string? GridInStackPanelName { get; set; }
+    public int? GridsInStackPanelRow { get; set; }
+    public List<TextBox_Serialize> TextBoxsInStackPanel{ get; set; }
 }

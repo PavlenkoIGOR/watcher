@@ -1,21 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Packaging;
 using System.Linq;
 using System.Printing;
-using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Markup;
 using System.Windows.Media;
-using System.Windows.Xps;
-using System.Windows.Xps.Packaging;
-using System.Xml.Linq;
 using watcher.BLL;
+using watcher.BLL.ForSerialize;
 using watcher.BLL.Services;
 using WRD = Microsoft.Office.Interop.Word;
 
@@ -101,7 +97,7 @@ public partial class MainWindow : System.Windows.Window
 
         //создание основной сетки 2х2
         Grid grid2x2 = _creating2x2GridClass.Creating2x2Grid();
-        grid2x2.Name = "grid2x2";
+        
         Grid.SetRow(grid2x2, A4.RowDefinitions.Count - 1);
         Grid.SetColumn(grid2x2, 0);
         grid2x2.Children.Add(headGrid);
@@ -126,6 +122,7 @@ public partial class MainWindow : System.Windows.Window
         ScrollViewerForTabs.Content = A4; //вставка А4
                                           //вставка в А4 таблицы-разметка 2х2
         A4.RegisterName("headGrid", headGrid);
+        A4.RegisterName("grid2x2", grid2x2);
     }
 
     private void Renew(object sender, RoutedEventArgs e)
@@ -190,6 +187,9 @@ public partial class MainWindow : System.Windows.Window
             }
         }
         sb.Clear();
+
+        Serializer();
+
     }
 
 
@@ -326,5 +326,84 @@ public partial class MainWindow : System.Windows.Window
         {
             headGrid.Children.Remove(child);
         }
+    }
+
+    /// <summary>
+    /// Метод для сериализации
+    /// </summary>
+    /// <returns></returns>
+    TP_TabSerialize Serializer()
+    {
+        TP_TabSerialize tP_TabSerialize = new TP_TabSerialize();
+        TextBox_Serialize textBoxInTProc_Serialize = new TextBox_Serialize();
+        TechProc_Serialize techProc_Serialize   = new TechProc_Serialize();
+        StackPanel_Serialize stackPanel_Serialize = new StackPanel_Serialize();
+        SheetSheetsGrid_Serialize sheetSheetsGrid_Serialize = new SheetSheetsGrid_Serialize();
+        GridInStackPanel_Serialize gridInStackPanel_Serialize = new GridInStackPanel_Serialize();
+        Grid2x2_Serialize grid2X2_Serialize = new Grid2x2_Serialize();
+        A4Serialize a4Serialize = new A4Serialize();
+
+        foreach (var child in ((Grid)myTabControl.FindName("headGrid")).Children)
+        {
+            if (child is TextBox)
+            {
+                techProc_Serialize.TextBoxsList_Serialize.Add(new TextBox_Serialize() 
+                {
+                    TextBoxRow = Grid.GetRow((TextBox)child),
+                    TextBoxColumn = Grid.GetColumn((TextBox)child),
+                    TextBoxColumnSpan = Grid.GetColumnSpan((TextBox)child),
+                    TextBoxRowSpan = Grid.GetRowSpan((TextBox)child),
+                    TextBox_Text = ((TextBox)child).Text
+                });
+            }
+            if (child is StackPanel)
+            {
+                List<GridInStackPanel_Serialize> gridInStackPanel_Ser = new List<GridInStackPanel_Serialize>();
+                int count = 0;
+                foreach (var childSP in (child as StackPanel).Children)
+                {
+                    if (childSP is Grid)
+                    {
+                        List<TextBox_Serialize> tbSer = new List<TextBox_Serialize>();
+                        foreach (var tb in (childSP as Grid).Children)
+                        {
+                            tbSer.Add(new TextBox_Serialize() 
+                            {
+                                TextBoxColumn = Grid.GetColumn((TextBox)tb),
+                                TextBoxRow = Grid.GetRowSpan((TextBox)tb),
+                                TextBox_Text = ((TextBox)tb).Text
+                            });
+                        }
+                        gridInStackPanel_Ser.Add(new GridInStackPanel_Serialize() 
+                        {
+                            GridsInStackPanelRow = count++,
+                            TextBoxsInStackPanel = tbSer
+                        });
+                    }
+                }
+                techProc_Serialize.StackPanelsList_Serialize.Add(new StackPanel_Serialize
+                {
+                    StackPanelRowInTechProcGrid = Grid.GetRow((StackPanel)child),
+                    StackPanelColumnInTechProcGrid = Grid.GetColumn((StackPanel)child),
+                    StackPanelSpanColumn = Grid.GetColumnSpan((StackPanel)child),
+                    gridsInStackPanel = gridInStackPanel_Ser
+                });
+            }
+        }
+
+        
+        // сохранение данных
+        using (FileStream fs = new FileStream(@"D:/Watcher.json", FileMode.OpenOrCreate))
+        {
+            JsonSerializerOptions options = new JsonSerializerOptions()
+            {
+                WriteIndented = true,
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            };
+            
+            JsonSerializer.Serialize<TechProc_Serialize>(fs, techProc_Serialize, options);
+            fs.Close();
+        }
+        return new TP_TabSerialize();
     }
 }
