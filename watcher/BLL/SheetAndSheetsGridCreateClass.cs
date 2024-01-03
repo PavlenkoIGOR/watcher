@@ -51,6 +51,7 @@ namespace watcher.BLL
             sheetsAndSheet.Children.Add(tSheets);
             sheetsAndSheet.Children.Add(tSheetNumber);
             sheetsAndSheet.Children.Add(tSheetsNumber);
+            sheetsAndSheet.Name = "sheetsAndSheet";
 
             return sheetsAndSheet;
         }

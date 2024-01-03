@@ -13,7 +13,7 @@ using System.Windows.Markup;
 
 namespace watcher.BLL
 {
-    public class TechProcGridCreatingClass : Grid
+    public class TechProcGridCreatingClass
     {
         //internal Grid mainGrid;
         private double globalHeight = 793.7d;
@@ -79,9 +79,9 @@ namespace watcher.BLL
         {
             //Создание "Основные и вспомогательные производственные операции и их последовательность"
             TextBox tb_OpAndFoll = new TextBox() { FontSize = 10, Background = new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)), BorderThickness = new Thickness(1, 2, 2, 1), BorderBrush = Brushes.Black, Text = "Основные и вспомогательные производственные операции и их последовательность", Margin = new Thickness(0, 0, 0, 0), VerticalAlignment = VerticalAlignment.Stretch, HorizontalAlignment = HorizontalAlignment.Stretch, HorizontalContentAlignment = HorizontalAlignment.Center };
-            SetRow(tb_OpAndFoll, 0);
-            SetColumn(tb_OpAndFoll, 0);
-            SetColumnSpan(tb_OpAndFoll, 8);
+            Grid.SetRow(tb_OpAndFoll, 0);
+            Grid.SetColumn(tb_OpAndFoll, 0);
+            Grid.SetColumnSpan(tb_OpAndFoll, 8);
 
             //Создание №п/п
             TextBox tb_PP = new TextBox() { FontSize = 10, Background = new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)), BorderThickness = new Thickness(1, 1, 1, 1), BorderBrush = Brushes.Black, TextWrapping = TextWrapping.Wrap, Text = "№   п/п", Margin = new Thickness(0, 0, 0, 0), VerticalAlignment = VerticalAlignment.Stretch, HorizontalAlignment = HorizontalAlignment.Stretch, HorizontalContentAlignment = HorizontalAlignment.Center, VerticalContentAlignment = VerticalAlignment.Center };
@@ -141,7 +141,12 @@ namespace watcher.BLL
             Grid.SetColumnSpan(tb6_2, 8);
 
             //таблица с Т.П.
-            Grid headGrid = new Grid() { HorizontalAlignment = HorizontalAlignment.Stretch, ShowGridLines = false, Name = "headGrid" };
+            Grid headGrid = new Grid()
+            {
+                Name = "headGrid",
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                ShowGridLines = false                
+            };
 
 
 

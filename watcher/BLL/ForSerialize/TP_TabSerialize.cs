@@ -9,6 +9,6 @@ namespace watcher.BLL.ForSerialize;
 public class TP_TabSerialize
 {
     public string? TabName { get; set; }
-    public A4Serialize A4Serialize {  get; set; } 
+    public A4Serialize A4Serialize { get; set; }
 
 }

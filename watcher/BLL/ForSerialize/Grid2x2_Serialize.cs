@@ -14,5 +14,5 @@ public class Grid2x2_Serialize
     public int? ColumnQuantity { get; set; }
     public TechProc_Serialize techProc_Serialize { get; set; }
     public SheetSheetsGrid_Serialize sheetSheetsGrid_Serialize { get; set;}
-    public TextBox_Serialize textBox_Serialize { get; set; }
+    public TextBox_Serialize textBox_Serialize { get; set; } = new TextBox_Serialize();
 }
