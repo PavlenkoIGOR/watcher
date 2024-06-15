@@ -12,7 +12,8 @@ public class TextBox_Serialize
     public int TextBoxColumn { get; set; }
     public int? TextBoxColumnSpan { get; set; }
     public int? TextBoxRowSpan { get; set; }
-    public string TextBox_Text { get; set; }
+    public string? TextBox_Text { get; set; }
+    public string? Tag { get; set; }
 }
 
 

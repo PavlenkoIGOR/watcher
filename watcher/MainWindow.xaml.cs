@@ -48,7 +48,7 @@ public partial class MainWindow : System.Windows.Window
         SaveMy.Click += (s, e) => RecursivelyProcessVisualTree();
     }
     /// <summary>
-    /// метод для подключения своего Frame
+    /// метод для подключения своего Frame. В данном случае метод для вставки титульного листа в первую вкладку
     /// </summary>
     private void InputPage()
     {
@@ -77,7 +77,7 @@ public partial class MainWindow : System.Windows.Window
 
     }
 
-    #region сегодня это не нужно
+    #region
     /// <summary>
     /// Метод вставки А4 во вкладку
     /// </summary>
@@ -345,99 +345,99 @@ public partial class MainWindow : System.Windows.Window
         TP_TabSerialize tP_TabSerialize = new TP_TabSerialize();
 
         List<Grid2x2_Serialize> grid2X2_Ser = new List<Grid2x2_Serialize>();
-        foreach (var item in A4.Children)
-        {
-            if ((item as Grid).Name == "mainGrid")
-            {
-                Grid2x2_Serialize grid2X2_Serialize_Inner = new Grid2x2_Serialize();
-                TextBox_Serialize textBox_Serialize = new TextBox_Serialize();
-                TechProc_Serialize techProc_Serialize = new TechProc_Serialize();
-                SheetSheetsGrid_Serialize sheetSheetsGrid_Serialize = new SheetSheetsGrid_Serialize();
+        //foreach (var item in A4.Children)
+        //{
+        //    if ((item as Grid).Name == "mainGrid")
+        //    {
+        //        Grid2x2_Serialize grid2X2_Serialize_Inner = new Grid2x2_Serialize();
+        //        TextBox_Serialize textBox_Serialize = new TextBox_Serialize();
+        //        TechProc_Serialize techProc_Serialize = new TechProc_Serialize();
+        //        SheetSheetsGrid_Serialize sheetSheetsGrid_Serialize = new SheetSheetsGrid_Serialize();
 
-                for (int i = 0; i < (item as Grid).Children.Count;i++)
-                {
-                    
-                    if (i == 0)
-                    {
-                        textBox_Serialize.TextBoxRow = Grid.GetRow((item as Grid).Children[0]);
-                        textBox_Serialize.TextBoxColumn = Grid.GetColumn((item as Grid).Children[0]);
-                        textBox_Serialize.TextBox_Text = ((TextBox)(item as Grid).Children[0]).Text;
-                    }
-                    if (i == 1)
-                    {
-                        foreach (var child in ((Grid)(item as Grid).Children[1]).Children)
-                        {
-                            if (child is TextBox)
-                            {
-                                techProc_Serialize.TextBoxsList_Serialize.Add(new TextBox_Serialize()
-                                {
-                                    TextBoxRow = Grid.GetRow((TextBox)child),
-                                    TextBoxColumn = Grid.GetColumn((TextBox)child),
-                                    TextBoxColumnSpan = Grid.GetColumnSpan((TextBox)child),
-                                    TextBoxRowSpan = Grid.GetRowSpan((TextBox)child),
-                                    TextBox_Text = ((TextBox)child).Text
-                                });
-                            }
-                            if (child is StackPanel)
-                            {
-                                List<GridInStackPanel_Serialize> gridInStackPanel_Ser = new List<GridInStackPanel_Serialize>();
-                                int count = 0;
-                                foreach (var childSP in (child as StackPanel).Children)
-                                {
-                                    if (childSP is Grid)
-                                    {
-                                        List<TextBox_Serialize> tbSer = new List<TextBox_Serialize>();
-                                        foreach (var tb in (childSP as Grid).Children)
-                                        {
-                                            tbSer.Add(new TextBox_Serialize()
-                                            {
-                                                TextBoxColumn = Grid.GetColumn((TextBox)tb),
-                                                TextBoxRow = Grid.GetRowSpan((TextBox)tb),
-                                                TextBox_Text = ((TextBox)tb).Text
-                                            });
-                                        }
-                                        gridInStackPanel_Ser.Add(new GridInStackPanel_Serialize()
-                                        {
-                                            GridsInStackPanelRow = count++,
-                                            TextBoxsInStackPanel = tbSer
-                                        });
-                                    }
-                                }
-                                techProc_Serialize.StackPanelsList_Serialize.Add(new StackPanel_Serialize
-                                {
-                                    StackPanelRowInTechProcGrid = Grid.GetRow((StackPanel)child),
-                                    StackPanelColumnInTechProcGrid = Grid.GetColumn((StackPanel)child),
-                                    StackPanelSpanColumn = Grid.GetColumnSpan((StackPanel)child),
-                                    gridsInStackPanel = gridInStackPanel_Ser
-                                });
-                            }
-                        }
-                    }
-                    if (i == 2)
-                    {
-                        sheetSheetsGrid_Serialize.Rows = ((Grid)(item as Grid).Children[2]).RowDefinitions.Count;
-                        sheetSheetsGrid_Serialize.Rows = ((Grid)(item as Grid).Children[2]).ColumnDefinitions.Count;
-                        sheetSheetsGrid_Serialize.SheetNum = 55;
-                        sheetSheetsGrid_Serialize.SheetsQuantity = 101;
-                    }
-                    
-                }
-                grid2X2_Ser.Add(new Grid2x2_Serialize() 
-                {
-                    textBox_Serialize = textBox_Serialize,
-                    techProc_Serialize = techProc_Serialize,
-                    sheetSheetsGrid_Serialize = sheetSheetsGrid_Serialize
-                });                
-            }
-            if ((item as Grid).Name == "AddA4DeleteA4")
-            {
-                MessageBox.Show("Это AddA4DeleteA4GridClass");
-            }
-        }        
-        tP_TabSerialize.A4Serialize = a4Serialize;
-        tP_TabSerialize.A4Serialize.A4Rows = A4.RowDefinitions.Count;
-        tP_TabSerialize.A4Serialize.grid2X2_Serialize = grid2X2_Ser;
-        
+        //        for (int i = 0; i < (item as Grid).Children.Count; i++)
+        //        {
+
+        //            if (i == 0)
+        //            {
+        //                textBox_Serialize.TextBoxRow = Grid.GetRow((item as Grid).Children[0]);
+        //                textBox_Serialize.TextBoxColumn = Grid.GetColumn((item as Grid).Children[0]);
+        //                textBox_Serialize.TextBox_Text = ((TextBox)(item as Grid).Children[0]).Text;
+        //            }
+        //            if (i == 1)
+        //            {
+        //                foreach (var child in ((Grid)(item as Grid).Children[1]).Children)
+        //                {
+        //                    if (child is TextBox)
+        //                    {
+        //                        techProc_Serialize.TextBoxsList_Serialize.Add(new TextBox_Serialize()
+        //                        {
+        //                            TextBoxRow = Grid.GetRow((TextBox)child),
+        //                            TextBoxColumn = Grid.GetColumn((TextBox)child),
+        //                            TextBoxColumnSpan = Grid.GetColumnSpan((TextBox)child),
+        //                            TextBoxRowSpan = Grid.GetRowSpan((TextBox)child),
+        //                            TextBox_Text = ((TextBox)child).Text
+        //                        });
+        //                    }
+        //                    if (child is StackPanel)
+        //                    {
+        //                        List<GridInStackPanel_Serialize> gridInStackPanel_Ser = new List<GridInStackPanel_Serialize>();
+        //                        int count = 0;
+        //                        foreach (var childSP in (child as StackPanel).Children)
+        //                        {
+        //                            if (childSP is Grid)
+        //                            {
+        //                                List<TextBox_Serialize> tbSer = new List<TextBox_Serialize>();
+        //                                foreach (var tb in (childSP as Grid).Children)
+        //                                {
+        //                                    tbSer.Add(new TextBox_Serialize()
+        //                                    {
+        //                                        TextBoxColumn = Grid.GetColumn((TextBox)tb),
+        //                                        TextBoxRow = Grid.GetRowSpan((TextBox)tb),
+        //                                        TextBox_Text = ((TextBox)tb).Text
+        //                                    });
+        //                                }
+        //                                gridInStackPanel_Ser.Add(new GridInStackPanel_Serialize()
+        //                                {
+        //                                    GridsInStackPanelRow = count++,
+        //                                    TextBoxsInStackPanel = tbSer
+        //                                });
+        //                            }
+        //                        }
+        //                        techProc_Serialize.StackPanelsList_Serialize.Add(new StackPanel_Serialize
+        //                        {
+        //                            StackPanelRowInTechProcGrid = Grid.GetRow((StackPanel)child),
+        //                            StackPanelColumnInTechProcGrid = Grid.GetColumn((StackPanel)child),
+        //                            StackPanelSpanColumn = Grid.GetColumnSpan((StackPanel)child),
+        //                            gridsInStackPanel = gridInStackPanel_Ser
+        //                        });
+        //                    }
+        //                }
+        //            }
+        //            if (i == 2)
+        //            {
+        //                sheetSheetsGrid_Serialize.Rows = ((Grid)(item as Grid).Children[2]).RowDefinitions.Count;
+        //                sheetSheetsGrid_Serialize.Rows = ((Grid)(item as Grid).Children[2]).ColumnDefinitions.Count;
+        //                sheetSheetsGrid_Serialize.SheetNum = 55;
+        //                sheetSheetsGrid_Serialize.SheetsQuantity = 101;
+        //            }
+
+        //        }
+        //        grid2X2_Ser.Add(new Grid2x2_Serialize()
+        //        {
+        //            textBox_Serialize = textBox_Serialize,
+        //            techProc_Serialize = techProc_Serialize,
+        //            sheetSheetsGrid_Serialize = sheetSheetsGrid_Serialize
+        //        });
+        //    }
+        //    if ((item as Grid).Name == "AddA4DeleteA4")
+        //    {
+        //        MessageBox.Show("Это AddA4DeleteA4GridClass");
+        //    }
+        //}
+        //tP_TabSerialize.A4Serialize = a4Serialize;
+        //tP_TabSerialize.A4Serialize.A4Rows = A4.RowDefinitions.Count;
+        //tP_TabSerialize.A4Serialize.grid2X2_Serialize = grid2X2_Ser;
+
 
         // сохранение данных
         using (FileStream fs = new FileStream(@"D:/Watcher.json", FileMode.Create, FileAccess.Write))

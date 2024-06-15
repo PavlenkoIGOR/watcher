@@ -8,7 +8,7 @@ namespace watcher.BLL
     {
         internal Grid Creating2x2Grid(/*Grid headGrid*/)
         {
-            TextBox textBox = new TextBox() { VerticalAlignment = VerticalAlignment.Stretch, HorizontalAlignment = HorizontalAlignment.Stretch, Text = "6Q", Background = new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)), VerticalContentAlignment = VerticalAlignment.Center, HorizontalContentAlignment = HorizontalAlignment.Center, BorderBrush = Brushes.Black, BorderThickness = new Thickness(2,2,1,2)};
+            TextBox textBox = new TextBox() { VerticalAlignment = VerticalAlignment.Stretch, HorizontalAlignment = HorizontalAlignment.Stretch, Text = "6", Background = new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)), VerticalContentAlignment = VerticalAlignment.Center, HorizontalContentAlignment = HorizontalAlignment.Center, BorderBrush = Brushes.Black, BorderThickness = new Thickness(2,2,1,2)};
             Grid.SetRow( textBox, 0 );
             Grid.SetColumn( textBox, 0 );
 
